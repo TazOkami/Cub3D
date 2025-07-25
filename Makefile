@@ -14,6 +14,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 SRCS = $(SRCDIR)/main.c \
 	   $(SRCDIR)/init/init_game.c \
 	   $(SRCDIR)/init/init_player.c \
+	   $(SRCDIR)/init/init_raycasting.c \
 	   $(SRCDIR)/init/init_textures.c \
 	   $(SRCDIR)/parsing/parse_map.c \
 	   $(SRCDIR)/parsing/parse_textures.c \

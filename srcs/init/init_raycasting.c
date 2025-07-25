@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   init_raycasting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 17:09:10 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/25 16:13:03 by Jpaulis          ###   ########.fr       */
+/*   Created: 2025/07/25 15:54:16 by Jpaulis           #+#    #+#             */
+/*   Updated: 2025/07/25 15:58:47 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void raycast_screen(t_game *game) 
+void	init_raycasting(t_raycast *rc, t_player *player, t_map *map)
 {
-    t_raycast ray;
-    int x;
-    
-    x = 0;
-    while (x < WINDOW_WIDTH)
-    {
-        double camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
-        init_ray(&ray, game, x);
-        
-        x++;
-    }
+	rc->ray_dir_x = player->dir_x + player->plane_x;
+	
 }

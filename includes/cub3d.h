@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/24 17:43:52 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/25 16:11:55 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
+
+# define CENTER_X (WINDOW_WIDTH / 2)
+# define CENTER_Y (WINDOW_HEIGHT / 2)
 
 // EVENTS
 int key_press(int keycode, t_game *game);
