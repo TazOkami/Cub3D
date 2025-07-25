@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/25 16:11:55 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/25 19:24:43 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int close_window(t_game *game);
 
 // INIT
 int init_game(t_game *game);
+void init_map_struct(t_map *map);
 
 // PARSING
 int parse_map(char *filename, t_game *game);
