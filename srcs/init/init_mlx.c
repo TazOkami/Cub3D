@@ -6,11 +6,18 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:20 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 16:45:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/26 19:18:40 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool init_events(t_game *game)
+{
+	mlx_hook(game->mlx.window_ptr, 17, 1L<<17, close_window, game);
+	mlx_key_hook(game->mlx.window_ptr, handle_keypress, game);
+	return (true);
+}
 
 bool init_mlx(t_game *game)
 {
@@ -31,6 +38,7 @@ bool init_mlx(t_game *game)
 											&game->mlx.line_length,
 											&game->mlx.endian);
 	printf("✅ MLX initialized successfully\n");
+	init_events(game);
 	return (true);
 }
 

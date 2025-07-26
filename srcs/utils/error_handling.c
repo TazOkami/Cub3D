@@ -6,16 +6,17 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 17:13:29 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 15:34:00 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/26 19:12:23 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void error_exit(char *message)
+int error_exit(char *message)
 {
 	printf("❌ Error: %s\n", message);
 	exit(EXIT_FAILURE);
+	return(-1);
 }
 
 bool safe_malloc_check(void *ptr, char *context)

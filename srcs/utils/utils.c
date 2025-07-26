@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 16:08:03 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 18:50:05 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/26 19:14:26 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,12 @@ char *ft_strdup(const char *s)
 	dup[i] = '\0';
 	return (dup);
 }
+
+int close_window(t_game *game)
+{
+    printf("🚪 Closing window...\n");
+    game->game_running = false;
+    exit(0);
+    return (0);
+}
+
