@@ -42,7 +42,7 @@ INIT_SRCS       = init_game.c init_mlx.c
 PARSING_SRCS    = parcer.c parse_map.c parse_textures.c verif.c
 RENDERING_SRCS  = raycasting.c wall_rendering.c sprite_rendering.c  
 CONTROLS_SRCS   = keyboard.c player_move.c
-UTILS_SRCS      = cleanup.c error_handling.c math_utils.c
+UTILS_SRCS      = cleanup.c error_handling.c math_utils.c utils.c
 
 # 🔗 Assemblage complet
 SRCS = $(addprefix $(SRCDIR)/init/, $(INIT_SRCS)) \

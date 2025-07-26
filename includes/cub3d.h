@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 16:02:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:09:08 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ bool    parse_map_line(t_game *game, char *line);
 void error_exit(char *message);
 bool safe_malloc_check(void *ptr, char *context);
 bool validate_file_extension(char *filename, char *extension);
+void cleanup_game(t_game *game);
+char *ft_strdup(const char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 16:03:03 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:06:42 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     
     if (argc != 2)
     {
-        ft_putstr_fd("Usage: ./cub3D map.cub\n", 2);
+        printf("Usage: ./cub3D map.cub\n");
         return (1);
     }
     if (!init_game(&game))
