@@ -6,30 +6,29 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/24 17:41:21 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:03:03 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game game;
+    t_game game;
     
     if (argc != 2)
     {
-        printf("Usage: ./cub3D <map.cub>\n");
+        ft_putstr_fd("Usage: ./cub3D map.cub\n", 2);
         return (1);
     }
-    
-    // Parser la map
-    if (parse_map(argv[1], &game) == -1)
-        return (1);
-        
-    // Initialiser le jeu
-    if (init_game(&game) == -1)
-        return (1);
+    if (!init_game(&game))
+        error_exit("Failed to initialize game");
 
-	return (0);
-
+    if (!parse_file(&game, argv[1]))
+        error_exit("Failed to parse map file");
+    printf("✅ Game initialized successfully!\n");
+    printf("📊 Map size: %dx%d\n", game.map.width, game.map.height);
+    printf("🎮 Player at: (%.2f, %.2f)\n", game.player.position.x, game.player.position.y);
+    cleanup_game(&game);
+    return (0);
 }

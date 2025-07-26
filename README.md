@@ -223,3 +223,60 @@ echo "🎮 Working on Tazokami branch - ready to code raycasting!"
 ```
 
 **🤝 Vos branches sont prêtes ! Au boulot les champions ! 🚀**
+
+
+
+
+# ═══════════════════════════════════════════════════════════
+# 🎮 UTILISATION MAKEFILE
+# ═══════════════════════════════════════════════════════════
+
+# 🏗️ Compilation normale
+make
+
+# 🚀 Compiler + lancer directement  
+make run
+
+# 🐛 Version debug pour déboguer
+make debug
+
+# ⚡ Version ultra-rapide
+make fast
+
+# 🧪 Tester le programme
+make test
+
+# 🗺️ Tester toutes les cartes
+make test-maps
+
+# 📊 Voir les infos du projet
+make info
+
+# 🔍 Vérifier la norme
+make norm
+
+
+JOUR 1-2: PARSING & INIT
+├── 📄 Parser le .cub (textures + couleurs + map)
+├── 🖼️ Charger les textures MLX
+└── 🎯 Init player position/direction
+
+JOUR 3-4: RAYCASTING DE BASE
+├── 🔫 Algo DDA simple (tes structures sont prêtes !)
+├── 🖼️ Rendu murs basique
+└── 🎨 Textures sur les murs
+
+JOUR 5: CONTRÔLES
+├── ⌨️ WASD + flèches (key_press/key_release)
+├── 🚶 Mouvement + rotation
+└── 🚪 Gestion ESC pour quitter
+
+JOUR 6: FINITIONS
+├── 🎨 Sol/plafond colorés
+├── 🐛 Debug + tests
+└── 📋 Norme + Makefile
+
+JOUR 7: POLISH
+├── ✨ Sprites (si temps)
+├── 🧪 Tests finaux
+└── 🎯 Rendu !
