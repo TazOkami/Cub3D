@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/27 15:21:47 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:25:54 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+#include "../libft/libft.h"
 #include "struct.h"
 #include "../minilibx-linux/mlx.h"
 #include "keys.h"
@@ -31,10 +32,15 @@ bool    init_mlx(t_game *game);
 bool init_events(t_game *game);
 
 // Parsing
-bool    parse_file(t_game *game, char *filename);
-bool    parse_textures(t_game *game, char *line);
-bool    parse_colors(t_game *game, char *line);
-bool    parse_map_line(t_game *game, char *line);
+int parse_cub_file(char *filename, t_parsing *parsing);
+int open_cub_file(char *filename);
+bool is_texture_line(char *line);
+bool is_color_line(char *line);
+bool is_map_line(char *line);
+void    parse_texture_line(char *line, t_parsing *parsing);
+void    parse_color_line(char *line, t_parsing *parsing);
+void    parse_map_line(char *line, t_parsing *parsing);
+int     check_parsing_complete(t_parsing *parsing);
 
 // CONTROLS
 int handle_keypress(int keycode, t_game *game);
@@ -44,7 +50,7 @@ int error_exit(char *message);
 bool safe_malloc_check(void *ptr, char *context);
 bool validate_file_extension(char *filename, char *extension);
 void cleanup_game(t_game *game);
-char *ft_strdup(const char *s);
 int close_window(t_game *game);
+
 
 #endif

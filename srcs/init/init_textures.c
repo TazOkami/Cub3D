@@ -6,9 +6,11 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 15:34:04 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/27 15:34:10 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/29 17:16:05 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 bool init_textures(t_game *game)
 {
@@ -29,23 +31,3 @@ bool init_textures(t_game *game)
     printf("✅ All textures loaded!\n");
     return (true);
 }
-typedef struct s_textures
-{
-    t_image wall;
-    t_image floor; 
-    t_image player;
-    t_image collectible;
-    t_image exit;
-    // Plus tard: ennemis, animations...
-} t_textures;
-
-typedef struct s_image
-{
-    void    *img_ptr;
-    char    *data;
-    int     width;
-    int     height;
-    int     bpp;
-    int     line_length;
-    int     endian;
-} t_image;

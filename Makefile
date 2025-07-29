@@ -21,17 +21,22 @@ SRCDIR      = srcs
 INCDIR      = includes
 OBJDIR      = objs
 LIBDIR      = minilibx-linux
+LIBFTDIR    = libft
 
 # Sous-dossiers sources
 SRCSUBDIRS  = init parsing rendering controls utils
 
 # ┌─────────────────────────────────────────────────────────┐
-# │ 🔗 CONFIGURATION MLX LINUX                             │
+# │ 🔗 CONFIGURATION MLX ET LIBFT LINUX                             │
 # └─────────────────────────────────────────────────────────┘
 
 MLX_PATH    = $(LIBDIR)
 MLX_LIB     = $(MLX_PATH)/libmlx.a
 MLX_FLAGS   = -L$(MLX_PATH) -lmlx -lXext -lX11
+
+LIBFT_PATH  = $(LIBFTDIR)
+LIBFT_LIB   = $(LIBFT_PATH)/libft.a
+LIBFT_FLAGS = -L$(LIBFT_PATH) -lft
 
 # ┌─────────────────────────────────────────────────────────┐
 # │ 📄 FICHIERS SOURCES                                    │
@@ -39,7 +44,7 @@ MLX_FLAGS   = -L$(MLX_PATH) -lmlx -lXext -lX11
 
 # 🎯 Sources par module
 INIT_SRCS       = init_game.c init_mlx.c
-PARSING_SRCS    = parcer.c parse_map.c parse_textures.c verif.c
+PARSING_SRCS    = parser.c parse_map.c parse_textures.c verif.c parse_colors.c
 RENDERING_SRCS  = raycasting.c wall_rendering.c sprite_rendering.c  
 CONTROLS_SRCS   = keyboard.c player_move.c
 UTILS_SRCS      = cleanup.c error_handling.c math_utils.c utils.c
@@ -74,15 +79,21 @@ BOLD    = \033[1m
 # └─────────────────────────────────────────────────────────┘
 
 # 🏗️ Compilation principale
-all: banner $(MLX_LIB) $(NAME)
+all: banner $(LIBFT_LIB) $(MLX_LIB) $(NAME)
 	@echo "$(GREEN)$(BOLD)🎮 Cub3D compilé avec succès !$(RESET)"
 	@echo "$(CYAN)💡 Utilisation: ./$(NAME) maps/map.cub$(RESET)"
 
 # 🎯 Création de l'exécutable
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT_LIB) $(MLX_LIB)
 	@echo "$(PURPLE)🔗 Linkage de $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OPTIMFLAGS) $(OBJS) $(MLX_FLAGS) $(MATHFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OPTIMFLAGS) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATHFLAGS) -o $(NAME)
 	@echo "$(GREEN)✅ $(NAME) créé !$(RESET)"
+
+# 🏗️ Compilation LIBFT
+$(LIBFT_LIB):
+	@echo "$(YELLOW)📚 Compilation de la libft...$(RESET)"
+	@make -C $(LIBFT_PATH) --silent
+	@echo "$(GREEN)✅ Libft compilée !$(RESET)"
 
 # 🏗️ Compilation MLX
 $(MLX_LIB):
@@ -94,7 +105,7 @@ $(MLX_LIB):
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
 	@echo "$(BLUE)🔨 Compilation: $(notdir $<)$(RESET)"
-	@$(CC) $(CFLAGS) $(OPTIMFLAGS) -I$(INCDIR) -I$(MLX_PATH) -c $< -o $@
+	@$(CC) $(CFLAGS) $(OPTIMFLAGS) -I$(INCDIR) -I$(LIBFT_PATH) -I$(MLX_PATH) -c $< -o $@
 
 # ┌─────────────────────────────────────────────────────────┐
 # │ 🧹 RÈGLES DE NETTOYAGE                                 │
@@ -105,12 +116,14 @@ clean:
 	@echo "$(RED)🧹 Nettoyage des objets...$(RESET)"
 	@rm -rf $(OBJDIR)
 	@make -C $(MLX_PATH) clean --silent
+	@make -C $(LIBFT_PATH) clean --silent    # ← NOUVEAU !
 	@echo "$(GREEN)✅ Objets supprimés !$(RESET)"
 
 # 🗑️ Nettoyage complet
 fclean: clean
 	@echo "$(RED)🧹 Nettoyage complet...$(RESET)"
 	@rm -f $(NAME)
+	@make -C $(LIBFT_PATH) fclean --silent   # ← NOUVEAU !
 	@echo "$(GREEN)✅ Projet nettoyé !$(RESET)"
 
 # 🔄 Reconstruction complète

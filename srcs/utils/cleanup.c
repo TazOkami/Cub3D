@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 17:14:01 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/27 15:30:54 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/29 17:29:36 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,17 @@ void cleanup_game(t_game *game)
 		}
 		free(game->map.grid);
 	}
-	// Free MLX (si initialisé)
 	if (game->mlx.image_ptr)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
 	if (game->mlx.window_ptr && !game->mlx.window_destroyed)
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
 	printf("🧹 Game cleaned up\n");
+}
+
+int close_window(t_game *game)
+{
+    printf("🚪 Closing window...\n");
+    game->game_running = false;
+    exit(0);
+    return (0);
 }

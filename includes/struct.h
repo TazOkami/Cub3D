@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:23:39 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/27 15:29:27 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:23:02 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_parsing
     char    *south_texture;     // Path to south wall texture file
     char    *west_texture;      // Path to west wall texture file
     char    *east_texture;      // Path to east wall texture file
-    int     floor_color;        // RGB color value for floor
-    int     ceiling_color;      // RGB color value for ceiling
+    int     floor_color[3];        // RGB color value for floor
+    int     ceiling_color[3];      // RGB color value for ceiling
     bool    all_loaded;         // Flag: all required elements parsed
     
 }   t_parsing;
@@ -167,6 +167,7 @@ typedef struct s_render_info
 // ═══════════════════════════════════════════════════════════
 typedef struct s_game
 {
+	t_parsing   parsing;
     t_mlx_context   mlx;        // MLX display context
     t_textures      textures;   // All textures and colors
     t_map_info      map;        // Map data and properties
