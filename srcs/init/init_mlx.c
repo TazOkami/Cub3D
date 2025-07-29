@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:20 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:18:40 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:26:26 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool init_events(t_game *game)
 {
-	mlx_hook(game->mlx.window_ptr, 17, 1L<<17, close_window, game);
+	mlx_hook(game->mlx.window_ptr, 17, 0, close_window, game);
 	mlx_key_hook(game->mlx.window_ptr, handle_keypress, game);
 	return (true);
 }

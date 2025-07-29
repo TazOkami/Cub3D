@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:12:43 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:23:53 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ int main(int argc, char **argv)
         return (error_exit("MLX init failed"));
     // if (!init_textures(&game))
     //     return (error_exit("Textures init failed"));
-    // if (!init_events(&game))
-    //     return (error_exit("Events init failed"));
+    if (!init_events(&game))
+    {
+        error_exit("Events init failed");
+        return (1);
+    }
 	printf("✅ Game initialized successfully!\n");
 	printf("📊 Map size: %dx%d\n", game.map.width, game.map.height);
 	printf("🎮 Player at: (%.2f, %.2f)\n", game.player.position.x, game.player.position.y);

@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:23:39 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:01:14 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:29:27 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_mlx_context
 {
     void    *mlx_ptr;           // MLX instance pointer
     void    *window_ptr;        // Window pointer
+	bool    window_destroyed;
     void    *image_ptr;         // Image buffer pointer
     char    *image_data;        // Raw pixel data array
     int     bits_per_pixel;     // Color depth (usually 32)

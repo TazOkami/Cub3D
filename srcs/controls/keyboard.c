@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:23:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:17:04 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:31:23 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int handle_keypress(int keycode, t_game *game)
 
 	if (keycode == KEY_ESC)
 	{
+		game->mlx.window_destroyed = true;
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
 		game->game_running = false;
 		mlx_loop_end(game->mlx.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:14:43 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:21:47 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 // INIT
 bool    init_game(t_game *game);
 bool    init_mlx(t_game *game);
+bool init_events(t_game *game);
 
 // Parsing
 bool    parse_file(t_game *game, char *filename);
