@@ -1,151 +1,153 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
+/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 12:44:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/30 11:16:17 by malafont         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
-// Dans srcs/parsing/transfer_data.c ou srcs/init/transfer_data.c
-bool transfer_parsed_data(t_game *game)
+static int	handle_keypress(int keycode, t_game *game)
 {
-    // Transfert des textures parsed vers game->textures
-    // (pour l'instant, juste validation)
-    
-    if (!game->parsing.all_loaded)
-    {
-        printf("❌ Parsing not complete\n");
-        return (false);
-    }
-    
-    // Conversion des couleurs parsing -> textures si nécessaire
-    game->textures.floor_color = 
-        (game->parsing.floor_color[0] << 16) |
-        (game->parsing.floor_color[1] << 8) |
-        game->parsing.floor_color[2];
-        
-    game->textures.ceiling_color = 
-        (game->parsing.ceiling_color[0] << 16) |
-        (game->parsing.ceiling_color[1] << 8) |
-        game->parsing.ceiling_color[2];
-    
-    // Pour l'instant, valeurs temporaires pour la map
-    game->map.width = 10;   // À remplacer par les vraies valeurs
-    game->map.height = 10;  // À remplacer par les vraies valeurs
-    
-    printf("✅ Data transferred from parsing to game structure\n");
-    return (true);
+	if (keycode == KEY_ESC)
+	{
+		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
+		exit(0);
+	}
+	if (keycode >= 0 && keycode < 65536)
+		game->keys[keycode] = true;
+	return (0);
 }
 
-
-int main(int argc, char **argv)
+static int	handle_keyrelease(int keycode, t_game *game)
 {
-    t_game game;
-    
-    // ✅ 1. Vérification des arguments
-    if (argc != 2)
-    {
-        printf("Usage: ./cub3D map.cub\n");
-        return (1);
-    }
-    
-    // ✅ 2. Initialiser la structure de jeu
-    if (!init_game(&game))
-        error_exit("Failed to initialize game");
-    
-    // ✅ 3. Parser le fichier .cub
-    if (!parse_cub_file(argv[1], &game.parsing))
-        error_exit("Failed to parse map file");
-    
-    // ✅ 4. Transférer les données parsées
-    if (!transfer_parsed_data(&game))
-        error_exit("Failed to transfer parsed data");
-    
-    // ✅ 5. Initialiser MLX
-    if (!init_mlx(&game))
-        error_exit("MLX init failed");
-    
-    // ✅ 6. Charger tes textures (TON CODE EXISTANT)
-    if (!init_textures(&game))
-        error_exit("Textures init failed");
-    
-    // ✅ 7. Configurer les événements
-    if (!init_events(&game))
-        error_exit("Events init failed");
-    
-    // ✅ 8. Affichage debug
-    printf("✅ Game initialized successfully!\n");
-    printf("📊 Map size: %dx%d\n", game.map.width, game.map.height);
-    printf("🎮 Player at: (%.2f, %.2f)\n", game.player.position.x, game.player.position.y);
-    printf("🎨 Floor color: RGB(%d,%d,%d)\n", 
-           game.parsing.floor_color[0], 
-           game.parsing.floor_color[1], 
-           game.parsing.floor_color[2]);
-    printf("🎨 Ceiling color: RGB(%d,%d,%d)\n", 
-           game.parsing.ceiling_color[0], 
-           game.parsing.ceiling_color[1], 
-           game.parsing.ceiling_color[2]);
-    printf("🚀 Starting game loop...\n");
-    
-    // ✅ 9. Lancer la boucle de jeu
-    mlx_loop(game.mlx.mlx_ptr);
-    
-    // ✅ 10. Nettoyage
-    cleanup_game(&game);
-    
-    printf("👋 Game closed properly!\n");
-    return (0);
+	if (keycode >= 0 && keycode < 65536)
+		game->keys[keycode] = false;
+	return (0);
 }
 
+static int	handle_destroy(t_game *game)
+{
+	game->game_running = false;
+	return (0);
+}
 
+static int	game_loop(t_game *game)
+{
+	if (!game->game_running)
+		return (0);
 
-// int main(int argc, char **argv)
-// {
-// 	t_game game;
-// 	int fd;
-//     char *line;
-	
-// 	if (argc != 2)
-// 	{
-// 		printf("Usage: ./cub3D map.cub\n");
-// 		return (1);
-// 	}
-// 	fd = open_cub_file(argv[1]);
-//     if (fd == -1)
-//         return (1);
-    
-//     // Test 2 : Lire ligne par ligne
-//     printf("📖 Reading file content:\n");
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         printf("Line: %s", line);
-//         free(line);
-//     }
-// 	if (!init_game(&game))
-// 		error_exit("Failed to initialize game");
-// 	if (!parse_cub_file(argv[1], &game.parsing))
-// 		error_exit("Failed to parse map file");
-// 	if (!init_mlx(&game))
-//         return (error_exit("MLX init failed"));
-//     // if (!init_textures(&game))
-//     //     return (error_exit("Textures init failed"));
-//     if (!init_events(&game))
-//     {
-//         error_exit("Events init failed");
-//         return (1);
-//     }
-// 	printf("✅ Game initialized successfully!\n");
-// 	printf("📊 Map size: %dx%d\n", game.map.width, game.map.height);
-// 	printf("🎮 Player at: (%.2f, %.2f)\n", game.player.position.x, game.player.position.y);
-// 	mlx_loop(game.mlx.mlx_ptr);
-// 	cleanup_game(&game);
-// 	close(fd);
-// 	printf("✅ File read successfully!\n");
-// 	return (0);
-// }
+	handle_player_movement(game);
+	render_scene(game);
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.window_ptr,
+							game->mlx.image_ptr, 0, 0);
+	return (0);
+}
+
+static void	init_game_defaults(t_game *game)
+{
+	game->game_running = true;
+	game->last_key = 0;
+
+	// Initialiser le joueur
+	game->player.position.x = 1.5;
+	game->player.position.y = 1.5;
+	game->player.direction.x = 1.0;
+	game->player.direction.y = 0.0;
+	game->player.camera_plane.x = 0.0;
+	game->player.camera_plane.y = 0.66;
+	game->player.move_speed = 0.1;
+	game->player.rotation_speed = 0.05;
+
+	// Initialiser la map par défaut
+	game->map.width = 8;
+	game->map.height = 8;
+	game->map.sprite_count = 0;
+	game->map.grid = NULL;
+
+	// Initialiser les couleurs par défaut
+	game->textures.floor_color = 0x808080;
+	game->textures.ceiling_color = 0x404040;
+}
+
+static int	init_mlx(t_game *game)
+{
+	game->mlx.mlx_ptr = mlx_init();
+	if (!game->mlx.mlx_ptr)
+		return (1);
+
+	game->mlx.window_ptr = mlx_new_window(game->mlx.mlx_ptr,
+											SCREEN_WIDTH, SCREEN_HEIGHT,
+											"Cub3D - Raycasting");
+	if (!game->mlx.window_ptr)
+		return (1);
+
+	game->mlx.image_ptr = mlx_new_image(game->mlx.mlx_ptr,
+										SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!game->mlx.image_ptr)
+		return (1);
+
+	game->mlx.image_data = mlx_get_data_addr(game->mlx.image_ptr,
+											&game->mlx.bits_per_pixel,
+											&game->mlx.line_length,
+											&game->mlx.endian);
+	if (!game->mlx.image_data)
+		return (1);
+
+	game->mlx.window_destroyed = false;
+	return (0);
+}
+
+static void	cleanup_game(t_game *game)
+{
+	if (game->mlx.image_ptr)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
+	if (game->mlx.window_ptr)
+		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
+	if (game->mlx.mlx_ptr)
+		mlx_destroy_display(game->mlx.mlx_ptr);
+	if (game->mlx.mlx_ptr)
+		free(game->mlx.mlx_ptr);
+	if (game->map.grid)
+		free_map_grid(game->map.grid, game->map.height);
+	if (game->sprites)
+		free(game->sprites);
+}
+
+int	main(int argc, char **argv)
+{
+	t_game	game;
+
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_putstr_fd("Usage: ./cub3d\n", 2);
+		return (1);
+	}
+	ft_memset(&game, 0, sizeof(t_game));
+	init_game_defaults(&game);
+	if (init_mlx(&game))
+	{
+		ft_putstr_fd("Error: MLX initialization failed\n", 2);
+		cleanup_game(&game);
+		return (1);
+	}
+	if (init_default_map(&game))
+	{
+		ft_putstr_fd("Error: Map initialization failed\n", 2);
+		cleanup_game(&game);
+		return (1);
+	}
+	mlx_hook(game.mlx.window_ptr, 2, 1L << 0, handle_keypress, &game);
+	mlx_hook(game.mlx.window_ptr, 3, 1L << 1, handle_keyrelease, &game);
+	mlx_hook(game.mlx.window_ptr, 17, 0, handle_destroy, &game);
+	mlx_loop_hook(game.mlx.mlx_ptr, game_loop, &game);
+	mlx_loop(game.mlx.mlx_ptr);
+	cleanup_game(&game);
+	return (0);
+}

@@ -1,58 +1,108 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
+/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 12:43:21 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/30 08:54:11 by malafont         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-# include <unistd.h>
+# include "../minilibx-linux/mlx.h"
 # include <stdlib.h>
-# include <string.h>
+# include <unistd.h>
 # include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
 # include <stdbool.h>
+# include "../libft/libft.h"
 
-#include "../libft/libft.h"
-#include "struct.h"
-#include "../minilibx-linux/mlx.h"
-#include "keys.h"
+// ═══════════════════════════════════════════════════════════
+// 🖥️ SCREEN CONSTANTS
+// ═══════════════════════════════════════════════════════════
+# define SCREEN_WIDTH 1536
+# define SCREEN_HEIGHT 1024
+# define TILE_SIZE 64
+# define FOV 0.66
+# define PI 3.14159265359
+# define PI2 1.57079632679
+# define PI3 4.71238898038
 
-// INIT
-bool    init_game(t_game *game);
-bool    init_mlx(t_game *game);
-bool    init_textures(t_game *game);
-bool init_events(t_game *game);
+// ═══════════════════════════════════════════════════════════
+// 🎮 KEY CODES
+// ═══════════════════════════════════════════════════════════
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
 
-// Parsing
-int parse_cub_file(char *filename, t_parsing *parsing);
-int open_cub_file(char *filename);
-bool is_texture_line(char *line);
-bool is_color_line(char *line);
-bool is_map_line(char *line);
-void    parse_texture_line(char *line, t_parsing *parsing);
-void    parse_color_line(char *line, t_parsing *parsing);
-void    parse_map_line(char *line, t_parsing *parsing);
-bool    check_parsing_complete(t_parsing *parsing);
+// ═══════════════════════════════════════════════════════════
+// 🗺️ MAP CONSTANTS
+// ═══════════════════════════════════════════════════════════
+# define MAP_WIDTH 16
+# define MAP_HEIGHT 12
+# define WALL 1
+# define EMPTY 0
 
+// ═══════════════════════════════════════════════════════════
+// 🎨 COLOR CONSTANTS
+// ═══════════════════════════════════════════════════════════
+# define COLOR_RED 0xFF0000
+# define COLOR_GREEN 0x00FF00
+# define COLOR_BLUE 0x0000FF
+# define COLOR_WHITE 0xFFFFFF
+# define COLOR_BLACK 0x000000
+# define COLOR_GRAY 0x808080
+# define COLOR_DARK_GRAY 0x404040
 
-// CONTROLS
-int handle_keypress(int keycode, t_game *game);
+# include "struct.h"
 
-// UTILS
-int error_exit(char *message);
-bool safe_malloc_check(void *ptr, char *context);
-bool validate_file_extension(char *filename, char *extension);
-void cleanup_game(t_game *game);
-int close_window(t_game *game);
+// ═══════════════════════════════════════════════════════════
+// 🎮 PLAYER MOVEMENT FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+void	handle_player_movement(t_game *game);
+void	move_player_forward(t_game *game);
+void	move_player_backward(t_game *game);
+void	rotate_player_left(t_game *game);
+void	rotate_player_right(t_game *game);
 
+// ═══════════════════════════════════════════════════════════
+// 🎨 RENDERING FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+void	render_scene(t_game *game);
+void	cast_rays(t_game *game);
+void	cast_single_ray(t_game *game, int x);
+void	init_ray(t_ray *ray, t_game *game, int x);
+void	perform_dda(t_ray *ray, t_game *game);
+void	calculate_wall_distance(t_ray *ray, t_game *game);
+void	draw_wall_column(t_game *game, t_ray *ray, int x);
+void	draw_floor_and_ceiling(t_game *game);
+void	put_pixel(t_game *game, int x, int y, int color);
+
+// ═══════════════════════════════════════════════════════════
+// 🗺️ MAP FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+int		init_default_map(t_game *game);
+void	free_map_grid(char **grid, int height);
+int		is_wall_at(t_game *game, double x, double y);
+int		get_map_cell(t_game *game, int x, int y);
+
+// ═══════════════════════════════════════════════════════════
+// 🧮 MATH UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+double	normalize_angle(double angle);
+double	calculate_distance(double x1, double y1, double x2, double y2);
+
+// ═══════════════════════════════════════════════════════════
+// 🛠️ UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+void	error_exit(char *message);
+void	cleanup_resources(t_game *game);
 
 #endif

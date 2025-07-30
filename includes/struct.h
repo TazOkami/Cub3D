@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
+/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:23:39 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/29 18:23:02 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/30 11:16:14 by malafont         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef STRUCT_H
 #define STRUCT_H
@@ -29,7 +29,7 @@ typedef struct s_parsing
     int     floor_color[3];        // RGB color value for floor
     int     ceiling_color[3];      // RGB color value for ceiling
     bool    all_loaded;         // Flag: all required elements parsed
-    
+
 }   t_parsing;
 
 // ═══════════════════════════════════════════════════════════
@@ -174,7 +174,8 @@ typedef struct s_game
     t_player        player;     // Player state and position
     t_sprite        *sprites;   // Array of sprites in the game
     bool            game_running; // Game loop control flag
-    int				last_key;   // Last pressed key code
+    int			last_key;   // Last pressed key code
+    bool            keys[65536]; // Tableau d'état des touches
 }   t_game;
 
 #endif
