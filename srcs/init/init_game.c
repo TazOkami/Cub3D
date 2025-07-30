@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:05 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:07:10 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/30 12:42:53 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,60 @@ static bool init_player(t_player *player)
 	return (true);
 }
 
-bool	init_game(t_game *game)
+bool init_game(t_game *game)
 {
-	// Zero everything
-	memset(game, 0, sizeof(t_game));
-	if (!init_player(&game->player))
-	{
-		printf("❌ Player initialization failed\n");
-		return (false);
-	}
-	// Init map
-	game->map.grid = NULL;
-	game->map.width = 0;
-	game->map.height = 0;
-	// Init colors to invalid values
-	game->textures.floor_color = -1;
-	game->textures.ceiling_color = -1;
-	// Game state
-	game->game_running = true;
-	printf("✅ Game structure initialized\n");
-	return (true);
+    // Zero everything
+    memset(game, 0, sizeof(t_game));
+    
+    if (!init_player(&game->player))
+    {
+        printf("❌ Player initialization failed\n");
+        return (false);
+    }
+    
+    // Init map
+    game->map.grid = NULL;
+    game->map.width = 0;
+    game->map.height = 0;
+    
+    // Init colors to invalid values (CORRIGÉ)
+    game->textures.floor_color = -1;
+    game->textures.ceiling_color = -1;
+    
+    // Init parsing colors à -1 (non définies)
+    game->parsing.floor_color[0] = -1;
+    game->parsing.floor_color[1] = -1;
+    game->parsing.floor_color[2] = -1;
+    game->parsing.ceiling_color[0] = -1;
+    game->parsing.ceiling_color[1] = -1;
+    game->parsing.ceiling_color[2] = -1;
+    game->parsing.all_loaded = false;
+    
+    // Game state
+    game->game_running = true;
+    
+    printf("✅ Game structure initialized\n");
+    return (true);
 }
+
+// bool	init_game(t_game *game)
+// {
+// 	// Zero everything
+// 	memset(game, 0, sizeof(t_game));
+// 	if (!init_player(&game->player))
+// 	{
+// 		printf("❌ Player initialization failed\n");
+// 		return (false);
+// 	}
+// 	// Init map
+// 	game->map.grid = NULL;
+// 	game->map.width = 0;
+// 	game->map.height = 0;
+// 	// Init colors to invalid values
+// 	game->textures.floor_color = -1;
+// 	game->textures.ceiling_color = -1;
+// 	// Game state
+// 	game->game_running = true;
+// 	printf("✅ Game structure initialized\n");
+// 	return (true);
+// }

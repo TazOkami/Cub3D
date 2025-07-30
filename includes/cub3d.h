@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/29 18:25:54 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/30 12:43:21 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 // INIT
 bool    init_game(t_game *game);
 bool    init_mlx(t_game *game);
+bool    init_textures(t_game *game);
 bool init_events(t_game *game);
 
 // Parsing
@@ -40,7 +41,8 @@ bool is_map_line(char *line);
 void    parse_texture_line(char *line, t_parsing *parsing);
 void    parse_color_line(char *line, t_parsing *parsing);
 void    parse_map_line(char *line, t_parsing *parsing);
-int     check_parsing_complete(t_parsing *parsing);
+bool    check_parsing_complete(t_parsing *parsing);
+
 
 // CONTROLS
 int handle_keypress(int keycode, t_game *game);

@@ -43,7 +43,7 @@ LIBFT_FLAGS = -L$(LIBFT_PATH) -lft
 # └─────────────────────────────────────────────────────────┘
 
 # 🎯 Sources par module
-INIT_SRCS       = init_game.c init_mlx.c
+INIT_SRCS       = init_game.c init_mlx.c init_textures.c
 PARSING_SRCS    = parser.c parse_map.c parse_textures.c verif.c parse_colors.c
 RENDERING_SRCS  = raycasting.c wall_rendering.c sprite_rendering.c  
 CONTROLS_SRCS   = keyboard.c player_move.c
