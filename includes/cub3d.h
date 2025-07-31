@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:13:19 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 16:42:41 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int		is_wall_at(t_game *game, double x, double y);
 int		get_map_cell(t_game *game, int x, int y);
 void	init_game_defaults(t_game *game);
 int	init_mlx(t_game *game);
+void set_player_direction(t_player *player, char direction);
 
 // ═══════════════════════════════════════════════════════════
 // 📄 PARSING FUNCTIONS
@@ -119,6 +120,7 @@ char	**build_final_map(t_parsing *parsing, t_player *player);
 bool	is_texture_line(char *line);
 bool	is_color_line(char *line);
 bool	is_map_line(char *line);
+bool	is_empty_line(char *line);
 
 
 double	normalize_angle(double angle);

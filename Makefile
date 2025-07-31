@@ -39,6 +39,9 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/init_game.c \
 	   $(SRCS_DIR)/init_textures.c \
 	   $(SRCS_DIR)/parser.c \
+	   $(SRCS_DIR)/verif.c \
+	   $(SRCS_DIR)/math.c \
+	   $(SRCS_DIR)/render.c \
 	   $(SRCS_DIR)/parse_textures.c \
 	   $(SRCS_DIR)/parse_colors.c \
 	   $(SRCS_DIR)/parse_map.c

@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:37:42 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:40:16 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 16:02:51 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,38 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_display(game->mlx.mlx_ptr);
 		free(game->mlx.mlx_ptr);
 	}
+	if (game->map.grid)
+		free_map_grid(game->map.grid, game->map.height);
+	if (game->sprites)
+		free(game->sprites);
+}
+
+void	free_map_grid(char **grid, int height)
+{
+	int	i;
+
+	if (!grid)
+		return ;
+	i = 0;
+	while (i < height)
+	{
+		if (grid[i])
+			free(grid[i]);
+		i++;
+	}
+	free(grid);
+}
+
+void	cleanup_resources(t_game *game)
+{
+	if (game->mlx.image_ptr)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
+	if (game->mlx.window_ptr)
+		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
+	if (game->mlx.mlx_ptr)
+		mlx_destroy_display(game->mlx.mlx_ptr);
+	if (game->mlx.mlx_ptr)
+		free(game->mlx.mlx_ptr);
 	if (game->map.grid)
 		free_map_grid(game->map.grid, game->map.height);
 	if (game->sprites)
