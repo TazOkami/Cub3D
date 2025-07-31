@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 16:42:41 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 21:03:38 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	free_map_grid(char **grid, int height);
 int		is_wall_at(t_game *game, double x, double y);
 int		get_map_cell(t_game *game, int x, int y);
 void	init_game_defaults(t_game *game);
-int	init_mlx(t_game *game);
-void set_player_direction(t_player *player, char direction);
+int		init_mlx(t_game *game);
+void	set_player_direction(t_player *player, char direction);
 
 // ═══════════════════════════════════════════════════════════
 // 📄 PARSING FUNCTIONS
@@ -121,8 +121,6 @@ bool	is_texture_line(char *line);
 bool	is_color_line(char *line);
 bool	is_map_line(char *line);
 bool	is_empty_line(char *line);
-
-
 double	normalize_angle(double angle);
 double	calculate_distance(double x1, double y1, double x2, double y2);
 
@@ -134,9 +132,8 @@ void	cleanup_and_exit(t_game *game, char *message);
 void	cleanup_resources(t_game *game);
 void	cleanup_game(t_game *game);
 void	free_parsing_data(t_parsing *parsing);
-int	handle_destroy(t_game *game);
-
-int	handle_keypress(int keycode, t_game *game);
-int	handle_keyrelease(int keycode, t_game *game);
+int		handle_destroy(t_game *game);
+int		handle_keypress(int keycode, t_game *game);
+int		handle_keyrelease(int keycode, t_game *game);
 
 #endif
