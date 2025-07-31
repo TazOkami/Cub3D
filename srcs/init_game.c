@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:05 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 16:13:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 21:21:14 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,48 @@ int	init_mlx(t_game *game)
 	return (0);
 }
 
-void set_player_direction(t_player *player, char direction)
+static void	set_ns_direction(t_player *player, char direction)
 {
-	switch (direction)
+	if (direction == 'N')
 	{
-		case 'N':
-			player->direction.x = 0.0;
-			player->direction.y = -1.0;
-			player->camera_plane.x = 0.66;
-			player->camera_plane.y = 0.0;
-			break;
-		case 'S':
-			player->direction.x = 0.0;
-			player->direction.y = 1.0;
-			player->camera_plane.x = -0.66;
-			player->camera_plane.y = 0.0;
-			break;
-		case 'E':
-			player->direction.x = 1.0;
-			player->direction.y = 0.0;
-			player->camera_plane.x = 0.0;
-			player->camera_plane.y = 0.66;
-			break;
-		case 'W':
-			player->direction.x = -1.0;
-			player->direction.y = 0.0;
-			player->camera_plane.x = 0.0;
-			player->camera_plane.y = -0.66;
-			break;
-		default:
-			error_exit("Invalid player direction");
+		player->direction.x = 0.0;
+		player->direction.y = -1.0;
+		player->camera_plane.x = 0.66;
+		player->camera_plane.y = 0.0;
 	}
+	else
+	{
+		player->direction.x = 0.0;
+		player->direction.y = 1.0;
+		player->camera_plane.x = -0.66;
+		player->camera_plane.y = 0.0;
+	}
+}
+
+static void	set_ew_direction(t_player *player, char direction)
+{
+	if (direction == 'E')
+	{
+		player->direction.x = 1.0;
+		player->direction.y = 0.0;
+		player->camera_plane.x = 0.0;
+		player->camera_plane.y = 0.66;
+	}
+	else
+	{
+		player->direction.x = -1.0;
+		player->direction.y = 0.0;
+		player->camera_plane.x = 0.0;
+		player->camera_plane.y = -0.66;
+	}
+}
+
+void	set_player_direction(t_player *player, char direction)
+{
+	if (direction == 'N' || direction == 'S')
+		set_ns_direction(player, direction);
+	else if (direction == 'E' || direction == 'W')
+		set_ew_direction(player, direction);
+	else
+		error_exit("Invalid player direction");
 }
