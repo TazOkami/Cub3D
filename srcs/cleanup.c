@@ -1,25 +1,23 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 15:00:00 by malafont         #+#    #+#             */
-/*   Updated: 2025/07/30 15:00:00 by malafont         ###   ########.fr       */
+/*   Created: 2025/07/31 15:37:42 by Jpaulis           #+#    #+#             */
+/*   Updated: 2025/07/31 15:40:16 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 void	free_parsing_data(t_parsing *parsing)
 {
-	int i;
+	int	i;
 
 	if (!parsing)
-		return;
-
-	// Free texture paths
+		return ;
 	if (parsing->north_texture)
 		free(parsing->north_texture);
 	if (parsing->south_texture)
@@ -28,14 +26,14 @@ void	free_parsing_data(t_parsing *parsing)
 		free(parsing->west_texture);
 	if (parsing->east_texture)
 		free(parsing->east_texture);
-
-	// Free map lines
 	if (parsing->map_lines)
 	{
-		for (i = 0; i < parsing->map_height; i++)
+		i = 0;
+		while (i < parsing->map_height)
 		{
 			if (parsing->map_lines[i])
 				free(parsing->map_lines[i]);
+			i++;
 		}
 		free(parsing->map_lines);
 	}
@@ -44,12 +42,8 @@ void	free_parsing_data(t_parsing *parsing)
 void	cleanup_game(t_game *game)
 {
 	if (!game)
-		return;
-
-	// Free textures
+		return ;
 	free_textures(game);
-
-	// Free texture paths
 	if (game->textures.north_path)
 		free(game->textures.north_path);
 	if (game->textures.south_path)
@@ -58,8 +52,6 @@ void	cleanup_game(t_game *game)
 		free(game->textures.east_path);
 	if (game->textures.west_path)
 		free(game->textures.west_path);
-
-	// Free MLX resources
 	if (game->mlx.image_ptr)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
 	if (game->mlx.window_ptr)
@@ -69,12 +61,8 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_display(game->mlx.mlx_ptr);
 		free(game->mlx.mlx_ptr);
 	}
-
-	// Free map
 	if (game->map.grid)
 		free_map_grid(game->map.grid, game->map.height);
-
-	// Free sprites
 	if (game->sprites)
 		free(game->sprites);
 }
