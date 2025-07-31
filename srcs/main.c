@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:12:51 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 15:35:50 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ static int	game_loop(t_game *game)
 {
 	if (!game->game_running)
 		return (0);
-
 	handle_player_movement(game);
 	render_scene(game);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.window_ptr,
-							game->mlx.image_ptr, 0, 0);
+		game->mlx.image_ptr, 0, 0);
 	return (0);
 }
 
