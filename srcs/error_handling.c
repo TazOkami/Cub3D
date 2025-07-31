@@ -10,7 +10,7 @@
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 #include <stdio.h>
 
 void	error_exit(char *message)

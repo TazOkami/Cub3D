@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 14:55:50 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:06:17 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -18,6 +18,9 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include "struct.h"
 # include "../libft/libft.h"
 
 // ═══════════════════════════════════════════════════════════
@@ -100,6 +103,8 @@ int		load_map(char *filename, t_game *game);
 void	free_map_grid(char **grid, int height);
 int		is_wall_at(t_game *game, double x, double y);
 int		get_map_cell(t_game *game, int x, int y);
+void	init_game_defaults(t_game *game);
+int	init_mlx(t_game *game);
 
 // ═══════════════════════════════════════════════════════════
 // 📄 PARSING FUNCTIONS
@@ -115,9 +120,7 @@ bool	is_texture_line(char *line);
 bool	is_color_line(char *line);
 bool	is_map_line(char *line);
 
-// ═══════════════════════════════════════════════════════════
-// 🧮 MATH UTILITY FUNCTIONS
-// ═══════════════════════════════════════════════════════════
+
 double	normalize_angle(double angle);
 double	calculate_distance(double x1, double y1, double x2, double y2);
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 #include <stdio.h>
 
 static int load_single_texture(void *mlx_ptr, t_texture *texture, char *path)

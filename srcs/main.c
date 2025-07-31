@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 14:55:42 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:06:38 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
@@ -51,77 +51,6 @@ static int	game_loop(t_game *game)
 							game->mlx.image_ptr, 0, 0);
 	return (0);
 }
-
-static void	init_game_defaults(t_game *game)
-{
-	game->game_running = true;
-	game->last_key = 0;
-
-	// Initialiser le joueur
-	game->player.position.x = 1.5;
-	game->player.position.y = 1.5;
-	game->player.direction.x = 1.0;
-	game->player.direction.y = 0.0;
-	game->player.camera_plane.x = 0.0;
-	game->player.camera_plane.y = 0.66;
-	game->player.move_speed = 0.1;
-	game->player.rotation_speed = 0.05;
-
-	// Initialiser la map par défaut
-	game->map.width = 8;
-	game->map.height = 8;
-	game->map.sprite_count = 0;
-	game->map.grid = NULL;
-
-	// Initialiser les couleurs par défaut
-	game->textures.floor_color = 0x808080;
-	game->textures.ceiling_color = 0x404040;
-}
-
-static int	init_mlx(t_game *game)
-{
-	game->mlx.mlx_ptr = mlx_init();
-	if (!game->mlx.mlx_ptr)
-		return (1);
-
-	game->mlx.window_ptr = mlx_new_window(game->mlx.mlx_ptr,
-											SCREEN_WIDTH, SCREEN_HEIGHT,
-											"Cub3D - Raycasting");
-	if (!game->mlx.window_ptr)
-		return (1);
-
-	game->mlx.image_ptr = mlx_new_image(game->mlx.mlx_ptr,
-										SCREEN_WIDTH, SCREEN_HEIGHT);
-	if (!game->mlx.image_ptr)
-		return (1);
-
-	game->mlx.image_data = mlx_get_data_addr(game->mlx.image_ptr,
-											&game->mlx.bits_per_pixel,
-											&game->mlx.line_length,
-											&game->mlx.endian);
-	if (!game->mlx.image_data)
-		return (1);
-
-	game->mlx.window_destroyed = false;
-	return (0);
-}
-
-// void	cleanup_game(t_game *game)
-// {
-// 	if (game->mlx.image_ptr)
-// 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
-// 	if (game->mlx.window_ptr)
-// 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
-// 	if (game->mlx.mlx_ptr)
-// 		mlx_destroy_display(game->mlx.mlx_ptr);
-// 	if (game->mlx.mlx_ptr)
-// 		free(game->mlx.mlx_ptr);
-// 	if (game->map.grid)
-// 		free_map_grid(game->map.grid, game->map.height);
-// 	if (game->sprites)
-// 		free(game->sprites);
-// 	free_textures(game);
-// }
 
 int	main(int argc, char **argv)
 {

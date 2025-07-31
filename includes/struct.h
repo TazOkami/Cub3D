@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:23:39 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 14:30:50 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:19:33 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef STRUCT_H
 #define STRUCT_H
@@ -22,16 +22,16 @@
 // ═══════════════════════════════════════════════════════════
 typedef struct s_parsing
 {
-    char    *north_texture;     // Path to north wall texture file
-    char    *south_texture;     // Path to south wall texture file
-    char    *west_texture;      // Path to west wall texture file
-    char    *east_texture;      // Path to east wall texture file
-    int     floor_color[3];        // RGB color value for floor
-    int     ceiling_color[3];      // RGB color value for ceiling
-    bool    all_loaded;         // Flag: all required elements parsed
-    char    **map_lines;        // Raw map lines from file
-    int     map_width;          // Map width
-    int     map_height;         // Map height
+	char    *north_texture;     // Path to north wall texture file
+	char    *south_texture;     // Path to south wall texture file
+	char    *west_texture;      // Path to west wall texture file
+	char    *east_texture;      // Path to east wall texture file
+	int     floor_color[3];        // RGB color value for floor
+	int     ceiling_color[3];      // RGB color value for ceiling
+	bool    all_loaded;         // Flag: all required elements parsed
+	char    **map_lines;        // Raw map lines from file
+	int     map_width;          // Map width
+	int     map_height;         // Map height
 }   t_parsing;
 
 // ═══════════════════════════════════════════════════════════
@@ -41,8 +41,8 @@ typedef struct s_parsing
 // ═══════════════════════════════════════════════════════════
 typedef struct s_vector2d
 {
-    double  x;                  // X coordinate or X component
-    double  y;                  // Y coordinate or Y component
+	double  x;                  // X coordinate or X component
+	double  y;                  // Y coordinate or Y component
 }   t_vector2d;
 
 // ═══════════════════════════════════════════════════════════
@@ -52,14 +52,14 @@ typedef struct s_vector2d
 // ═══════════════════════════════════════════════════════════
 typedef struct s_mlx_context
 {
-    void    *mlx_ptr;           // MLX instance pointer
-    void    *window_ptr;        // Window pointer
+	void    *mlx_ptr;           // MLX instance pointer
+	void    *window_ptr;        // Window pointer
 	bool    window_destroyed;
-    void    *image_ptr;         // Image buffer pointer
-    char    *image_data;        // Raw pixel data array
-    int     bits_per_pixel;     // Color depth (usually 32)
-    int     line_length;        // Bytes per image line
-    int     endian;             // Byte order (big/little endian)
+	void    *image_ptr;         // Image buffer pointer
+	char    *image_data;        // Raw pixel data array
+	int     bits_per_pixel;     // Color depth (usually 32)
+	int     line_length;        // Bytes per image line
+	int     endian;             // Byte order (big/little endian)
 }   t_mlx_context;
 
 // ═══════════════════════════════════════════════════════════
@@ -69,13 +69,13 @@ typedef struct s_mlx_context
 // ═══════════════════════════════════════════════════════════
 typedef struct s_texture
 {
-    void            *image_ptr; // MLX image pointer
-    unsigned int    *pixels;    // Array of pixel color values
-    int             width;      // Texture width in pixels
-    int             height;     // Texture height in pixels
-    int             bpp;        // Bits per pixel
-    int             line_length; // Bytes per line
-    int             endian;     // Byte order
+	void            *image_ptr; // MLX image pointer
+	unsigned int    *pixels;    // Array of pixel color values
+	int             width;      // Texture width in pixels
+	int             height;     // Texture height in pixels
+	int             bpp;        // Bits per pixel
+	int             line_length; // Bytes per line
+	int             endian;     // Byte order
 }   t_texture;
 
 // ═══════════════════════════════════════════════════════════
@@ -85,17 +85,17 @@ typedef struct s_texture
 // ═══════════════════════════════════════════════════════════
 typedef struct s_textures
 {
-    t_texture   north_wall;     // Texture for north-facing walls
-    t_texture   south_wall;     // Texture for south-facing walls
-    t_texture   east_wall;      // Texture for east-facing walls
-    t_texture   west_wall;      // Texture for west-facing walls
-    t_texture   sprite;         // Texture for sprites/objects
-    int         floor_color;    // RGB color for floor rendering
-    int         ceiling_color;  // RGB color for ceiling rendering
-    char        *north_path;    // Path to north texture file
-    char        *south_path;    // Path to south texture file
-    char        *east_path;     // Path to east texture file
-    char        *west_path;     // Path to west texture file
+	t_texture   north_wall;     // Texture for north-facing walls
+	t_texture   south_wall;     // Texture for south-facing walls
+	t_texture   east_wall;      // Texture for east-facing walls
+	t_texture   west_wall;      // Texture for west-facing walls
+	t_texture   sprite;         // Texture for sprites/objects
+	int         floor_color;    // RGB color for floor rendering
+	int         ceiling_color;  // RGB color for ceiling rendering
+	char        *north_path;    // Path to north texture file
+	char        *south_path;    // Path to south texture file
+	char        *east_path;     // Path to east texture file
+	char        *west_path;     // Path to west texture file
 }   t_textures;
 
 // ═══════════════════════════════════════════════════════════
@@ -105,10 +105,10 @@ typedef struct s_textures
 // ═══════════════════════════════════════════════════════════
 typedef struct s_map_info
 {
-    char    **grid;             // 2D array representing the map
-    int     width;              // Map width in grid units
-    int     height;             // Map height in grid units
-    int     sprite_count;       // Number of sprites in map
+	char    **grid;             // 2D array representing the map
+	int     width;              // Map width in grid units
+	int     height;             // Map height in grid units
+	int     sprite_count;       // Number of sprites in map
 }   t_map_info;
 
 // ═══════════════════════════════════════════════════════════
@@ -118,11 +118,11 @@ typedef struct s_map_info
 // ═══════════════════════════════════════════════════════════
 typedef struct s_player
 {
-    t_vector2d  position;       // Current position in map coordinates
-    t_vector2d  direction;      // Direction vector (where player looks)
-    t_vector2d  camera_plane;   // Camera plane for field of view
-    double      move_speed;     // Movement speed multiplier
-    double      rotation_speed; // Rotation speed in radians
+	t_vector2d  position;       // Current position in map coordinates
+	t_vector2d  direction;      // Direction vector (where player looks)
+	t_vector2d  camera_plane;   // Camera plane for field of view
+	double      move_speed;     // Movement speed multiplier
+	double      rotation_speed; // Rotation speed in radians
 }   t_player;
 
 // ═══════════════════════════════════════════════════════════
@@ -132,14 +132,14 @@ typedef struct s_player
 // ═══════════════════════════════════════════════════════════
 typedef struct s_ray
 {
-    t_vector2d  direction;      // Ray direction vector
-    t_vector2d  delta_distance; // Distance between grid lines
-    t_vector2d  side_distance;  // Distance to next grid line
-    t_vector2d  map_position;   // Current map grid position
-    t_vector2d  step;           // Step direction (+1 or -1)
-    double      perpendicular_wall_distance; // Distance to wall
-    int         hit_side;       // Wall side hit (0=NS, 1=EW)
-    bool        wall_hit;       // Flag: ray hit a wall
+	t_vector2d  direction;      // Ray direction vector
+	t_vector2d  delta_distance; // Distance between grid lines
+	t_vector2d  side_distance;  // Distance to next grid line
+	t_vector2d  map_position;   // Current map grid position
+	t_vector2d  step;           // Step direction (+1 or -1)
+	double      perpendicular_wall_distance; // Distance to wall
+	int         hit_side;       // Wall side hit (0=NS, 1=EW)
+	bool        wall_hit;       // Flag: ray hit a wall
 }   t_ray;
 
 // ═══════════════════════════════════════════════════════════
@@ -149,10 +149,10 @@ typedef struct s_ray
 // ═══════════════════════════════════════════════════════════
 typedef struct s_sprite
 {
-    t_vector2d  position;       // Sprite position in map coordinates
-    double      distance_from_player; // Distance for depth sorting
-    int         texture_x;      // X coordinate in texture
-    int         texture_y;      // Y coordinate in texture
+	t_vector2d  position;       // Sprite position in map coordinates
+	double      distance_from_player; // Distance for depth sorting
+	int         texture_x;      // X coordinate in texture
+	int         texture_y;      // Y coordinate in texture
 }   t_sprite;
 
 // ═══════════════════════════════════════════════════════════
@@ -162,11 +162,11 @@ typedef struct s_sprite
 // ═══════════════════════════════════════════════════════════
 typedef struct s_render_info
 {
-    int     line_height;        // Height of wall line to draw
-    int     line_start;         // Start Y position for wall
-    int     line_end;           // End Y position for wall
-    int     texture_x;          // X coordinate in wall texture
-    double  wall_x;             // Exact wall hit position
+	int     line_height;        // Height of wall line to draw
+	int     line_start;         // Start Y position for wall
+	int     line_end;           // End Y position for wall
+	int     texture_x;          // X coordinate in wall texture
+	double  wall_x;             // Exact wall hit position
 }   t_render_info;
 
 // ═══════════════════════════════════════════════════════════
@@ -177,14 +177,14 @@ typedef struct s_render_info
 typedef struct s_game
 {
 	t_parsing   parsing;
-    t_mlx_context   mlx;        // MLX display context
-    t_textures      textures;   // All textures and colors
-    t_map_info      map;        // Map data and properties
-    t_player        player;     // Player state and position
-    t_sprite        *sprites;   // Array of sprites in the game
-    bool            game_running; // Game loop control flag
-    int			last_key;   // Last pressed key code
-    bool            keys[65536]; // Tableau d'état des touches
+	t_mlx_context   mlx;        // MLX display context
+	t_textures      textures;   // All textures and colors
+	t_map_info      map;        // Map data and properties
+	t_player        player;     // Player state and position
+	t_sprite        *sprites;   // Array of sprites in the game
+	bool            game_running; // Game loop control flag
+	int			last_key;   // Last pressed key code
+	bool            keys[65536]; // Tableau d'état des touches
 }   t_game;
 
 #endif
