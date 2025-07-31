@@ -6,7 +6,7 @@
 /*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:23:39 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 11:16:14 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:30:50 by malafont         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -29,7 +29,9 @@ typedef struct s_parsing
     int     floor_color[3];        // RGB color value for floor
     int     ceiling_color[3];      // RGB color value for ceiling
     bool    all_loaded;         // Flag: all required elements parsed
-
+    char    **map_lines;        // Raw map lines from file
+    int     map_width;          // Map width
+    int     map_height;         // Map height
 }   t_parsing;
 
 // ═══════════════════════════════════════════════════════════
@@ -71,6 +73,9 @@ typedef struct s_texture
     unsigned int    *pixels;    // Array of pixel color values
     int             width;      // Texture width in pixels
     int             height;     // Texture height in pixels
+    int             bpp;        // Bits per pixel
+    int             line_length; // Bytes per line
+    int             endian;     // Byte order
 }   t_texture;
 
 // ═══════════════════════════════════════════════════════════
@@ -87,6 +92,10 @@ typedef struct s_textures
     t_texture   sprite;         // Texture for sprites/objects
     int         floor_color;    // RGB color for floor rendering
     int         ceiling_color;  // RGB color for ceiling rendering
+    char        *north_path;    // Path to north texture file
+    char        *south_path;    // Path to south texture file
+    char        *east_path;     // Path to east texture file
+    char        *west_path;     // Path to west texture file
 }   t_textures;
 
 // ═══════════════════════════════════════════════════════════

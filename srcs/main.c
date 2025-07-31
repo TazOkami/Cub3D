@@ -6,7 +6,7 @@
 /*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 11:16:17 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:55:42 by malafont         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -103,46 +103,41 @@ static int	init_mlx(t_game *game)
 	return (0);
 }
 
-static void	cleanup_game(t_game *game)
-{
-	if (game->mlx.image_ptr)
-		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
-	if (game->mlx.window_ptr)
-		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
-	if (game->mlx.mlx_ptr)
-		mlx_destroy_display(game->mlx.mlx_ptr);
-	if (game->mlx.mlx_ptr)
-		free(game->mlx.mlx_ptr);
-	if (game->map.grid)
-		free_map_grid(game->map.grid, game->map.height);
-	if (game->sprites)
-		free(game->sprites);
-}
+// void	cleanup_game(t_game *game)
+// {
+// 	if (game->mlx.image_ptr)
+// 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.image_ptr);
+// 	if (game->mlx.window_ptr)
+// 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
+// 	if (game->mlx.mlx_ptr)
+// 		mlx_destroy_display(game->mlx.mlx_ptr);
+// 	if (game->mlx.mlx_ptr)
+// 		free(game->mlx.mlx_ptr);
+// 	if (game->map.grid)
+// 		free_map_grid(game->map.grid, game->map.height);
+// 	if (game->sprites)
+// 		free(game->sprites);
+// 	free_textures(game);
+// }
 
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	(void)argv;
-	if (argc != 1)
+	if (argc != 2)
 	{
-		ft_putstr_fd("Usage: ./cub3d\n", 2);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2);
 		return (1);
 	}
 	ft_memset(&game, 0, sizeof(t_game));
 	init_game_defaults(&game);
 	if (init_mlx(&game))
-	{
-		ft_putstr_fd("Error: MLX initialization failed\n", 2);
-		cleanup_game(&game);
-		return (1);
-	}
-	if (init_default_map(&game))
-	{
-		ft_putstr_fd("Error: Map initialization failed\n", 2);
-		cleanup_game(&game);
-		return (1);
-	}
+		cleanup_and_exit(&game, "MLX initialization failed");
+	if (load_map(argv[1], &game))
+		cleanup_and_exit(&game, "Map loading failed");
+	if (load_textures(&game))
+		cleanup_and_exit(&game, "Texture loading failed");
 	mlx_hook(game.mlx.window_ptr, 2, 1L << 0, handle_keypress, &game);
 	mlx_hook(game.mlx.window_ptr, 3, 1L << 1, handle_keyrelease, &game);
 	mlx_hook(game.mlx.window_ptr, 17, 0, handle_destroy, &game);

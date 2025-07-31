@@ -6,7 +6,7 @@
 /*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 16:08:03 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 08:55:14 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:55:53 by malafont         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -84,14 +84,6 @@ double	calculate_distance(double x1, double y1, double x2, double y2)
 	dx = x2 - x1;
 	dy = y2 - y1;
 	return (sqrt(dx * dx + dy * dy));
-}
-
-void	error_exit(char *message)
-{
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
-	exit(1);
 }
 
 void	cleanup_resources(t_game *game)

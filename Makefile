@@ -20,7 +20,14 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/controls/player_move.c \
 	   $(SRCS_DIR)/rendering/raycasting.c \
 	   $(SRCS_DIR)/utils/utils.c \
-	   $(SRCS_DIR)/init/init_game.c
+	   $(SRCS_DIR)/utils/error_handling.c \
+	   $(SRCS_DIR)/utils/cleanup.c \
+	   $(SRCS_DIR)/init/init_game.c \
+	   $(SRCS_DIR)/init/init_textures.c \
+	   $(SRCS_DIR)/parsing/parser.c \
+	   $(SRCS_DIR)/parsing/parse_textures.c \
+	   $(SRCS_DIR)/parsing/parse_colors.c \
+	   $(SRCS_DIR)/parsing/parse_map.c
 
 # Objects
 OBJS_DIR = objs

@@ -92,6 +92,11 @@ void	draw_wall_column(t_game *game, t_ray *ray, int x)
 	int		draw_end;
 	int		color;
 	int		y;
+	t_texture	*texture;
+	double	wall_x;
+	int		texture_x;
+	double	step;
+	double	texture_pos;
 
 	line_height = (int)(SCREEN_HEIGHT / ray->perpendicular_wall_distance);
 	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
@@ -101,37 +106,62 @@ void	draw_wall_column(t_game *game, t_ray *ray, int x)
 	if (draw_end >= SCREEN_HEIGHT)
 		draw_end = SCREEN_HEIGHT - 1;
 
-	// Différentes couleurs selon l'orientation et la distance
-	if (ray->hit_side == 0) // Murs Nord/Sud
+	// Select texture based on wall side
+	if (ray->hit_side == 0) // North/South walls
 	{
-		if (ray->step.x > 0) // Mur Sud
-			color = COLOR_RED;
-		else // Mur Nord
-			color = COLOR_BLUE;
+		if (ray->step.x > 0) // South wall
+			texture = &game->textures.south_wall;
+		else // North wall
+			texture = &game->textures.north_wall;
 	}
-	else // Murs Est/Ouest
+	else // East/West walls
 	{
-		if (ray->step.y > 0) // Mur Est
-			color = COLOR_GREEN;
-		else // Mur Ouest
-			color = 0xFF8000; // Orange
+		if (ray->step.y > 0) // East wall
+			texture = &game->textures.east_wall;
+		else // West wall
+			texture = &game->textures.west_wall;
 	}
 
-	// Assombrir les murs plus éloignés
-	double distance_factor = 1.0 / (1.0 + ray->perpendicular_wall_distance * 0.1);
-	int r = (color >> 16) & 0xFF;
-	int g = (color >> 8) & 0xFF;
-	int b = color & 0xFF;
+	// Calculate wall_x (exact position where ray hit the wall)
+	if (ray->hit_side == 0)
+		wall_x = game->player.position.y + ray->perpendicular_wall_distance * ray->direction.y;
+	else
+		wall_x = game->player.position.x + ray->perpendicular_wall_distance * ray->direction.x;
+	wall_x -= floor(wall_x);
 
-	r = (int)(r * distance_factor);
-	g = (int)(g * distance_factor);
-	b = (int)(b * distance_factor);
+	// Calculate texture_x coordinate
+	texture_x = (int)(wall_x * texture->width);
+	if (ray->hit_side == 0 && ray->direction.x > 0)
+		texture_x = texture->width - texture_x - 1;
+	if (ray->hit_side == 1 && ray->direction.y < 0)
+		texture_x = texture->width - texture_x - 1;
 
-	color = (r << 16) | (g << 8) | b;
+	// Calculate step and starting position for texture
+	step = 1.0 * texture->height / line_height;
+	texture_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 
+	// Draw the wall column
 	y = draw_start;
 	while (y < draw_end)
 	{
+		int texture_y = (int)texture_pos & (texture->height - 1);
+		texture_pos += step;
+
+		// Get pixel from texture
+		color = get_texture_pixel(texture, texture_x, texture_y);
+
+		// Apply distance shading
+		double distance_factor = 1.0 / (1.0 + ray->perpendicular_wall_distance * 0.1);
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = color & 0xFF;
+
+		r = (int)(r * distance_factor);
+		g = (int)(g * distance_factor);
+		b = (int)(b * distance_factor);
+
+		color = (r << 16) | (g << 8) | b;
+
 		put_pixel(game, x, y, color);
 		y++;
 	}

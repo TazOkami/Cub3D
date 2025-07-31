@@ -1,45 +1,29 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   error_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
+/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 17:13:29 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/26 19:12:23 by Jpaulis          ###   ########.fr       */
+/*   Created: 2025/07/30 15:00:00 by malafont         #+#    #+#             */
+/*   Updated: 2025/07/30 15:00:00 by malafont         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
+#include <stdio.h>
 
-int error_exit(char *message)
+void	error_exit(char *message)
 {
-	printf("❌ Error: %s\n", message);
-	exit(EXIT_FAILURE);
-	return(-1);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
+	exit(1);
 }
 
-bool safe_malloc_check(void *ptr, char *context)
+void	cleanup_and_exit(t_game *game, char *message)
 {
-	if (!ptr)
-	{
-		printf("❌ Malloc failed in: %s\n", context);
-		return (false);
-	}
-	return (true);
-}
-
-bool validate_file_extension(char *filename, char *extension)
-{
-	int filename_len;
-	int ext_len;
-	
-	if (!filename || !extension)
-		return (false);
-
-	filename_len = strlen(filename);
-	ext_len = strlen(extension);
-	if (filename_len < ext_len)
-		return (false);
-	return (strcmp(filename + filename_len - ext_len, extension) == 0);
+	if (game)
+		cleanup_game(game);
+	error_exit(message);
 }

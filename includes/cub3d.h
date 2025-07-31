@@ -6,7 +6,7 @@
 /*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/30 08:54:11 by malafont         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:55:50 by malafont         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -86,12 +86,34 @@ void	draw_floor_and_ceiling(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);
 
 // ═══════════════════════════════════════════════════════════
+// 🖼️ TEXTURE FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+int		load_textures(t_game *game);
+void	free_textures(t_game *game);
+int		get_texture_pixel(t_texture *texture, int x, int y);
+
+// ═══════════════════════════════════════════════════════════
 // 🗺️ MAP FUNCTIONS
 // ═══════════════════════════════════════════════════════════
 int		init_default_map(t_game *game);
+int		load_map(char *filename, t_game *game);
 void	free_map_grid(char **grid, int height);
 int		is_wall_at(t_game *game, double x, double y);
 int		get_map_cell(t_game *game, int x, int y);
+
+// ═══════════════════════════════════════════════════════════
+// 📄 PARSING FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+int		parse_cub_file(char *filename, t_parsing *parsing);
+int		open_cub_file(char *filename);
+int		check_parsing_complete(t_parsing *parsing);
+void	parse_texture_line(char *line, t_parsing *parsing);
+void	parse_color_line(char *line, t_parsing *parsing);
+void	parse_map_line(char *line, t_parsing *parsing);
+char	**build_final_map(t_parsing *parsing, t_player *player);
+bool	is_texture_line(char *line);
+bool	is_color_line(char *line);
+bool	is_map_line(char *line);
 
 // ═══════════════════════════════════════════════════════════
 // 🧮 MATH UTILITY FUNCTIONS
@@ -103,6 +125,9 @@ double	calculate_distance(double x1, double y1, double x2, double y2);
 // 🛠️ UTILITY FUNCTIONS
 // ═══════════════════════════════════════════════════════════
 void	error_exit(char *message);
+void	cleanup_and_exit(t_game *game, char *message);
 void	cleanup_resources(t_game *game);
+void	cleanup_game(t_game *game);
+void	free_parsing_data(t_parsing *parsing);
 
 #endif
