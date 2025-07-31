@@ -34,6 +34,9 @@ static int	handle_keyrelease(int keycode, t_game *game)
 static int	handle_destroy(t_game *game)
 {
 	game->game_running = false;
+	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
+	exit(0);
+
 	return (0);
 }
 
