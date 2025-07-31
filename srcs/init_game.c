@@ -6,11 +6,11 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:05 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:05:58 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 15:44:04 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_game_defaults(t_game *game)
 {
@@ -37,25 +37,19 @@ int	init_mlx(t_game *game)
 	game->mlx.mlx_ptr = mlx_init();
 	if (!game->mlx.mlx_ptr)
 		return (1);
-
 	game->mlx.window_ptr = mlx_new_window(game->mlx.mlx_ptr,
-											SCREEN_WIDTH, SCREEN_HEIGHT,
-											"Cub3D - Raycasting");
+			SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D - Raycasting");
 	if (!game->mlx.window_ptr)
 		return (1);
-
 	game->mlx.image_ptr = mlx_new_image(game->mlx.mlx_ptr,
-										SCREEN_WIDTH, SCREEN_HEIGHT);
+			SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!game->mlx.image_ptr)
 		return (1);
-
 	game->mlx.image_data = mlx_get_data_addr(game->mlx.image_ptr,
-											&game->mlx.bits_per_pixel,
-											&game->mlx.line_length,
-											&game->mlx.endian);
+			&game->mlx.bits_per_pixel, &game->mlx.line_length,
+			&game->mlx.endian);
 	if (!game->mlx.image_data)
 		return (1);
-
 	game->mlx.window_destroyed = false;
 	return (0);
 }

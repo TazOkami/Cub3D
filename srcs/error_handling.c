@@ -1,17 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                  :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 15:00:00 by malafont         #+#    #+#             */
-/*   Updated: 2025/07/30 15:00:00 by malafont         ###   ########.fr       */
+/*   Created: 2025/07/31 15:42:19 by Jpaulis           #+#    #+#             */
+/*   Updated: 2025/07/31 15:42:28 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdio.h>
 
 void	error_exit(char *message)
 {
@@ -33,6 +32,5 @@ int	handle_destroy(t_game *game)
 	game->game_running = false;
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
 	exit(0);
-
 	return (0);
 }
