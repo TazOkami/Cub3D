@@ -43,57 +43,100 @@ LIBS = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
 GREEN = \033[0;32m
 RED = \033[0;31m
 YELLOW = \033[0;33m
+BLUE = \033[0;34m
+PURPLE = \033[0;35m
+CYAN = \033[0;36m
 NC = \033[0m
+BOLD = \033[1m
 
-.PHONY: all clean fclean re
+# Progress
+TOTAL_FILES = $(words $(SRCS))
+CURRENT = 0
 
-all: $(NAME)
+.PHONY: all clean fclean re run debug help verbose
+
+all: banner $(NAME)
+	@echo "$(GREEN)$(BOLD)✅ $(NAME) compiled successfully!$(NC)"
+	@echo "$(CYAN)💡 Run with: ./$(NAME) maps/map.cub$(NC)"
+
+banner:
+	@echo "$(PURPLE)$(BOLD)"
+	@echo "  ░█████╗░██╗░░░██╗██████╗░███████╗██████╗░"
+	@echo "  ██╔══██╗██║░░░██║██╔══██╗╚════██║██╔══██╗"
+	@echo "  ██║░░╚═╝██║░░░██║██████╦╝███████║██║░░██║"
+	@echo "  ██║░░██╗██║░░░██║██╔══██╗╚════██║██║░░██║"
+	@echo "  ╚█████╔╝╚██████╔╝██████╦╝███████║██████╔╝"
+	@echo "  ░╚════╝░░╚═════╝░╚═════╝░╚══════╝╚═════╝░$(NC)"
+	@echo "$(CYAN)🎮 Building Cub3D...$(NC)"
+	@echo ""
 
 $(NAME): $(OBJS) $(MLX_LIB) $(LIBFT_LIB)
-	@echo "$(GREEN)🔗 Linking $(NAME)...$(NC)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
-	@echo "$(GREEN)✅ $(NAME) compiled successfully!$(NC)"
+	@echo "$(PURPLE)🔗 Linking $(NAME)...$(NC)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) 2>/dev/null || \
+		(echo "$(RED)❌ Linking failed!$(NC)" && exit 1)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | progress
 	@mkdir -p $(dir $@)
-	@echo "$(YELLOW)🔨 Compiling $<...$(NC)"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(eval CURRENT=$(shell echo $$(($(CURRENT)+1))))
+	@printf "$(YELLOW)🔨 [%2d/$(TOTAL_FILES)] Compiling %-30s$(NC)\r" $(CURRENT) "$(notdir $<)"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 2>/dev/null || \
+		(echo "\n$(RED)❌ Compilation failed: $<$(NC)" && exit 1)
+
+progress:
+	@$(eval CURRENT=0)
 
 $(MLX_LIB):
-	@echo "$(YELLOW)🔨 Compiling MLX...$(NC)"
-	@make -C $(MLX_DIR)
+	@echo "$(BLUE)📦 Building MinilibX...$(NC)"
+	@make -C $(MLX_DIR) --silent 2>/dev/null || \
+		(echo "$(RED)❌ MLX compilation failed!$(NC)" && exit 1)
 
 $(LIBFT_LIB):
-	@echo "$(YELLOW)🔨 Compiling libft...$(NC)"
-	@make -C $(LIBFT_DIR)
+	@echo "$(BLUE)📚 Building libft...$(NC)"
+	@make -C $(LIBFT_DIR) --silent 2>/dev/null || \
+		(echo "$(RED)❌ Libft compilation failed!$(NC)" && exit 1)
 
 clean:
 	@echo "$(RED)🧹 Cleaning objects...$(NC)"
 	@rm -rf $(OBJS_DIR)
-	@make -C $(MLX_DIR) clean
-	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean --silent 2>/dev/null
+	@make -C $(LIBFT_DIR) clean --silent 2>/dev/null
+	@echo "$(GREEN)✅ Objects cleaned!$(NC)"
 
 fclean: clean
-	@echo "$(RED)🧹 Cleaning executable...$(NC)"
+	@echo "$(RED)🧹 Deep cleaning...$(NC)"
 	@rm -f $(NAME)
-	@make -C $(MLX_DIR) clean
-	@make -C $(LIBFT_DIR) fclean
+	@make -C $(LIBFT_DIR) fclean --silent 2>/dev/null
+	@echo "$(GREEN)✅ Everything cleaned!$(NC)"
 
 re: fclean all
 
 run: $(NAME)
-	@echo "$(GREEN)🚀 Running $(NAME)...$(NC)"
+	@echo "$(GREEN)🚀 Launching $(NAME)...$(NC)"
 	@./$(NAME)
 
-debug: CFLAGS += -g
-debug: $(NAME)
+debug: CFLAGS += -g -fsanitize=address
+debug: re
+	@echo "$(YELLOW)🐛 Debug version ready!$(NC)"
+
+verbose: CFLAGS += -v
+verbose: 
+	@echo "$(CYAN)🔍 Verbose mode enabled$(NC)"
+	@make all --no-print-directory
 
 help:
-	@echo "$(GREEN)📋 Available targets:$(NC)"
-	@echo "  all     - Compile the project"
-	@echo "  clean   - Remove object files"
-	@echo "  fclean  - Remove all generated files"
-	@echo "  re      - Recompile everything"
-	@echo "  run     - Compile and run the program"
-	@echo "  debug   - Compile with debug symbols"
-	@echo "  help    - Show this help message"
+	@echo "$(BOLD)$(CYAN)📋 CUB3D MAKEFILE HELP$(NC)"
+	@echo ""
+	@echo "$(YELLOW)🎯 Main targets:$(NC)"
+	@echo "  $(GREEN)make$(NC)         - Compile the project (silent)"
+	@echo "  $(GREEN)make verbose$(NC) - Compile with full output"
+	@echo "  $(GREEN)make debug$(NC)   - Compile with debug flags"
+	@echo "  $(GREEN)make run$(NC)     - Compile and run"
+	@echo ""
+	@echo "$(YELLOW)🧹 Cleaning:$(NC)"
+	@echo "  $(GREEN)make clean$(NC)   - Remove object files"
+	@echo "  $(GREEN)make fclean$(NC)  - Remove all generated files"
+	@echo "  $(GREEN)make re$(NC)      - Full recompilation"
+	@echo ""
+	@echo "$(YELLOW)ℹ️  Other:$(NC)"
+	@echo "  $(GREEN)make help$(NC)    - Show this help"
+	@echo ""
