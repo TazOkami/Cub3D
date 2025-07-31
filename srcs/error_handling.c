@@ -27,3 +27,12 @@ void	cleanup_and_exit(t_game *game, char *message)
 		cleanup_game(game);
 	error_exit(message);
 }
+
+int	handle_destroy(t_game *game)
+{
+	game->game_running = false;
+	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
+	exit(0);
+
+	return (0);
+}

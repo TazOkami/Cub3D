@@ -35,6 +35,7 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/utils.c \
 	   $(SRCS_DIR)/error_handling.c \
 	   $(SRCS_DIR)/cleanup.c \
+	   $(SRCS_DIR)/key_events.c \
 	   $(SRCS_DIR)/init_game.c \
 	   $(SRCS_DIR)/init_textures.c \
 	   $(SRCS_DIR)/parser.c \

@@ -6,39 +6,11 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:06:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 15:12:51 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-static int	handle_keypress(int keycode, t_game *game)
-{
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
-		exit(0);
-	}
-	if (keycode >= 0 && keycode < 65536)
-		game->keys[keycode] = true;
-	return (0);
-}
-
-static int	handle_keyrelease(int keycode, t_game *game)
-{
-	if (keycode >= 0 && keycode < 65536)
-		game->keys[keycode] = false;
-	return (0);
-}
-
-static int	handle_destroy(t_game *game)
-{
-	game->game_running = false;
-	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
-	exit(0);
-
-	return (0);
-}
 
 static int	game_loop(t_game *game)
 {

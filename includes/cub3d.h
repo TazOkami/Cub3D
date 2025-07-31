@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:06:17 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/07/31 15:13:19 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,9 @@ void	cleanup_and_exit(t_game *game, char *message);
 void	cleanup_resources(t_game *game);
 void	cleanup_game(t_game *game);
 void	free_parsing_data(t_parsing *parsing);
+int	handle_destroy(t_game *game);
+
+int	handle_keypress(int keycode, t_game *game);
+int	handle_keyrelease(int keycode, t_game *game);
 
 #endif
