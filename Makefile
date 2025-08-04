@@ -42,8 +42,11 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/verif.c \
 	   $(SRCS_DIR)/math.c \
 	   $(SRCS_DIR)/render.c \
+	   $(SRCS_DIR)/render_utils.c \
 	   $(SRCS_DIR)/parse_textures.c \
 	   $(SRCS_DIR)/parse_colors.c \
+	   $(SRCS_DIR)/parse_map_utils.c \
+	   $(SRCS_DIR)/parse_map_free.c \
 	   $(SRCS_DIR)/parse_map.c
 
 # Objects

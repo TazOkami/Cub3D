@@ -98,6 +98,19 @@ typedef struct s_textures
 	char		*west_path; // Path to west texture file
 }	t_textures;
 
+
+typedef struct s_draw_context
+{
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		texture_x;
+	double	step;
+	int		x;
+}	t_draw_context;
+
+
+
 // ═══════════════════════════════════════════════════════════
 // 🗺️ MAP INFORMATION STRUCTURE
 // Contains the game map data and metadata
@@ -110,6 +123,24 @@ typedef struct s_map_info
 	int		height; // Map height in grid units
 	int		sprite_count; // Number of sprites in map
 }	t_map_info;
+
+// ne remplace pas la structude ci dessu qui est utiliser par t_game une fois tout initialiser
+// est utiliser pour alleger le nombre de paramettre dans parse map.
+// aurais pus etre inclu dans t_parsing mais trop de truc a remodifier apres.
+typedef struct s_temp_map
+{
+	char		**grid;
+	int			width;
+	int			height;
+}	t_temp_map;
+
+// pour la clarter parsque x et y sont des position et non des taille.
+typedef struct s_map_pos
+{
+	char		**grid;
+	int			y;
+	int			x;
+}	t_map_pos;
 
 // ═══════════════════════════════════════════════════════════
 // 🎮 PLAYER STRUCTURE

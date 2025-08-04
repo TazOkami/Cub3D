@@ -88,6 +88,10 @@ void	draw_wall_column(t_game *game, t_ray *ray, int x);
 void	draw_floor_and_ceiling(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);
 
+// nouvelle fonction render_utils.c
+t_texture	*select_wall_texture(t_game *game, t_ray *ray);
+int get_texture_x(t_game *game, t_ray *ray, t_texture *texture);
+
 // ═══════════════════════════════════════════════════════════
 // 🖼️ TEXTURE FUNCTIONS
 // ═══════════════════════════════════════════════════════════
@@ -106,6 +110,11 @@ int		get_map_cell(t_game *game, int x, int y);
 void	init_game_defaults(t_game *game);
 int		init_mlx(t_game *game);
 void	set_player_direction(t_player *player, char direction);
+void	set_player_from_map(t_vector2d *pos, char *dir,	t_map_pos pos_data);
+bool	is_spawn(char c);
+void	find_player_position(t_temp_map map, t_vector2d *pos, char *dir);
+void	validate_map(char **map, int height, int width);
+void	free_map_lines(char **map_lines, int count);
 
 // ═══════════════════════════════════════════════════════════
 // 📄 PARSING FUNCTIONS
