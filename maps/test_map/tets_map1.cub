@@ -2,7 +2,7 @@
 NO ./textures/walls/north_wall.xpm
 SO ./textures/walls/south_wall.xpm
 WE ./textures/walls/west_wall.xpm
-EA ./textures/walls/east_wall.xpm
+EA ./textures/walls/east_wall
 F 255,204,153
 C 102,178,250
 

@@ -10,51 +10,71 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// strstr - Cherche la première occurrence 
+// strstr - Cherche la première occurrence
 // de la chaîne needle dans la chaîne haystack
-// Retourne un pointeur vers le début 
+// Retourne un pointeur vers le début
 // de la chaîne trouvée, ou NULL si needle n'est pas trouvée
 // #include <stddef.h>
 
 #include "libft.h"
+
+// char	*ft_strstr(const char *haystack, const char *needle)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	if (!*needle)
+// 		return ((char *)haystack);
+// 	while (*haystack)
+// 	{
+// 		j = 0;
+// 		while (haystack[i + j] == needle[j])
+// 		{
+// 			if (needle[j + 1] == '\0')
+// 				return ((char *)(&haystack[i]));
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
 	int	i;
 	int	j;
 
-	i = 0;
 	if (!*needle)
 		return ((char *)haystack);
-	while (*haystack)
+	i = 0;
+	while (haystack[i])
 	{
 		j = 0;
-		while (haystack[i + j] == needle[j])
-		{
-			if (needle[j + 1] == '\0')
-				return ((char *)(&haystack[i]));
+		while (needle[j] && haystack[i + j] == needle[j])
 			j++;
-		}
+		if (!needle[j])
+			return ((char *)&haystack[i]);
 		i++;
 	}
 	return (NULL);
 }
 
-/*
-#include <stdio.h>
-#include <string.h>
 
-int main() {
-	const char *haystack = "Hello, world!";
-	const char *needle = "world";
-	char *result = strstr(haystack, needle);
+// #include <stdio.h>
+// #include <string.h>
 
-	if (result) {
-		printf("Found: %s\n", result);
-	} else {
-		printf("Not found\n");
-	}
+// int main() {
+// 	const char *haystack = "Hello, world!";
+// 	const char *needle = "z";
+// 	char *result = strstr(haystack, needle);
 
-	return 0;
-}
-*/
+// 	if (result) {
+// 		printf("Found: %s\n", result);
+// 	} else {
+// 		printf("Not found\n");
+// 	}
+
+// 	return 0;
+// }
+

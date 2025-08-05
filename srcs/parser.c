@@ -16,7 +16,7 @@ int	open_cub_file(char *filename)
 {
 	int	fd;
 
-	if (!ft_strstr(filename, ".cub"))
+	if (!filename || !ft_strstr(filename, ".cub"))
 	{
 		printf("Error: File must have .cub extension\n");
 		return (-1);
@@ -79,7 +79,7 @@ int	load_map(char *filename, t_game *game)
 	printf("🗺️ Loading map from: %s\n", filename);
 	if (parse_cub_file(filename, &parsing))
 	{
-		free_parsing_data(&parsing);
+		//free_parsing_data(&parsing);
 		cleanup_and_exit(game, "Failed to parse .cub file");
 	}
 	game->map.grid = build_final_map(&parsing, &game->player);

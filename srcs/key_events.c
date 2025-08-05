@@ -18,10 +18,14 @@ void	handle_player_movement(t_game *game)
 		move_player_forward(game);
 	if (game->keys[KEY_S])
 		move_player_backward(game);
-	if (game->keys[KEY_A] || game->keys[KEY_LEFT])
+	if ( game->keys[KEY_LEFT])
 		rotate_player_left(game);
-	if (game->keys[KEY_D] || game->keys[KEY_RIGHT])
+	if (game->keys[KEY_RIGHT])
 		rotate_player_right(game);
+	if (game->keys[KEY_A] )
+		move_player_left(game);
+	if (game->keys[KEY_D])
+		move_player_right(game);
 }
 
 int	handle_keypress(int keycode, t_game *game)
