@@ -44,50 +44,35 @@ void	move_player_backward(t_game *game)
 	}
 }
 
-void	rotate_player_left(t_game *game)
+void	move_player_left(t_game *game)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	t_vector2d	right;
+	double		new_x;
+	double		new_y;
 
-	old_dir_x = game->player.direction.x;
-	old_plane_x = game->player.camera_plane.x;
-	game->player.direction.x = game->player.direction.x
-		* cos(-game->player.rotation_speed)
-		- game->player.direction.y
-		* sin(-game->player.rotation_speed);
-	game->player.direction.y = old_dir_x * sin(-game->player.rotation_speed)
-		+ game->player.direction.y
-		* cos(-game->player.rotation_speed);
-	game->player.camera_plane.x = game->player.camera_plane.x
-		* cos(-game->player.rotation_speed)
-		- game->player.camera_plane.y
-		* sin(-game->player.rotation_speed);
-	game->player.camera_plane.y = old_plane_x
-		* sin(-game->player.rotation_speed)
-		+ game->player.camera_plane.y
-		* cos(-game->player.rotation_speed);
+	right.x = game->player.direction.y;
+	right.y = -game->player.direction.x;
+	new_x = game->player.position.x - right.x * game->player.move_speed;
+	new_y = game->player.position.y - right.y * game->player.move_speed;
+	if (!is_wall_at(game, new_x, new_y))
+	{
+		game->player.position.x = new_x;
+		game->player.position.y = new_y;
+	}
 }
-
-void	rotate_player_right(t_game *game)
+void	move_player_right(t_game *game)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	t_vector2d	right;
+	double		new_x;
+	double		new_y;
 
-	old_dir_x = game->player.direction.x;
-	old_plane_x = game->player.camera_plane.x;
-	game->player.direction.x = game->player.direction.x
-		* cos(game->player.rotation_speed)
-		- game->player.direction.y
-		* sin(game->player.rotation_speed);
-	game->player.direction.y = old_dir_x * sin(game->player.rotation_speed)
-		+ game->player.direction.y
-		* cos(game->player.rotation_speed);
-	game->player.camera_plane.x = game->player.camera_plane.x
-		* cos(game->player.rotation_speed)
-		- game->player.camera_plane.y
-		* sin(game->player.rotation_speed);
-	game->player.camera_plane.y = old_plane_x
-		* sin(game->player.rotation_speed)
-		+ game->player.camera_plane.y
-		* cos(game->player.rotation_speed);
+	right.x = game->player.direction.y;
+	right.y = -game->player.direction.x;
+	new_x = game->player.position.x + right.x * game->player.move_speed;
+	new_y = game->player.position.y + right.y * game->player.move_speed;
+	if (!is_wall_at(game, new_x, new_y))
+	{
+		game->player.position.x = new_x;
+		game->player.position.y = new_y;
+	}
 }

@@ -31,6 +31,7 @@ LIBFT_LIB = $(LIBFT_DIR)/libft.a
 # Sources
 SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/player_move.c \
+	   $(SRCS_DIR)/player_rotate.c \
 	   $(SRCS_DIR)/raycasting.c \
 	   $(SRCS_DIR)/utils.c \
 	   $(SRCS_DIR)/error_handling.c \

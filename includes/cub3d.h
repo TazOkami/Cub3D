@@ -37,8 +37,8 @@
 // ═══════════════════════════════════════════════════════════
 // 🎮 KEY CODES
 // ═══════════════════════════════════════════════════════════
-# define KEY_W 122 // 119
-# define KEY_A  113// 97
+# define KEY_W   119// 122
+# define KEY_A  97 //  113
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_LEFT 65361
@@ -74,6 +74,8 @@ void	move_player_forward(t_game *game);
 void	move_player_backward(t_game *game);
 void	rotate_player_left(t_game *game);
 void	rotate_player_right(t_game *game);
+void	move_player_left(t_game *game);
+void	move_player_right(t_game *game);
 
 // ═══════════════════════════════════════════════════════════
 // 🎨 RENDERING FUNCTIONS
