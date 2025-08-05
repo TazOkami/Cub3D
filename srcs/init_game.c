@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:05 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 21:21:14 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 15:13:57 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_game_defaults(t_game *game)
 
 int	init_mlx(t_game *game)
 {
+	ft_memset(&game->mlx, 0, sizeof(t_mlx_context));
 	game->mlx.mlx_ptr = mlx_init();
 	if (!game->mlx.mlx_ptr)
 		return (1);

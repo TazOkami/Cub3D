@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:44:30 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:49:05 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 15:10:19 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,6 @@ int	load_textures(t_game *game)
 		return (1);
 	printf("✅ All textures loaded successfully!\n");
 	return (0);
-}
-
-void	free_textures(t_game *game)
-{
-	if (game->textures.north_wall.image_ptr)
-		mlx_destroy_image(game->mlx.mlx_ptr,
-			game->textures.north_wall.image_ptr);
-	if (game->textures.south_wall.image_ptr)
-		mlx_destroy_image(game->mlx.mlx_ptr,
-			game->textures.south_wall.image_ptr);
-	if (game->textures.east_wall.image_ptr)
-		mlx_destroy_image(game->mlx.mlx_ptr,
-			game->textures.east_wall.image_ptr);
-	if (game->textures.west_wall.image_ptr)
-		mlx_destroy_image(game->mlx.mlx_ptr,
-			game->textures.west_wall.image_ptr);
-	printf("🧹 Textures freed\n");
 }
 
 int	get_texture_pixel(t_texture *texture, int x, int y)

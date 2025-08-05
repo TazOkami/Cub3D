@@ -6,11 +6,28 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:37:42 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 16:02:51 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 16:07:18 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	free_textures(t_game *game)
+{
+	if (game->textures.north_wall.image_ptr)
+		mlx_destroy_image(game->mlx.mlx_ptr,
+			game->textures.north_wall.image_ptr);
+	if (game->textures.south_wall.image_ptr)
+		mlx_destroy_image(game->mlx.mlx_ptr,
+			game->textures.south_wall.image_ptr);
+	if (game->textures.east_wall.image_ptr)
+		mlx_destroy_image(game->mlx.mlx_ptr,
+			game->textures.east_wall.image_ptr);
+	if (game->textures.west_wall.image_ptr)
+		mlx_destroy_image(game->mlx.mlx_ptr,
+			game->textures.west_wall.image_ptr);
+	printf("🧹 Textures freed\n");
+}
 
 void	free_parsing_data(t_parsing *parsing)
 {
