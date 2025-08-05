@@ -17,3 +17,18 @@ STILL REACHABLE DANS NOTRE CODE :
 
 ==25389== 104 bytes in 1 blocks are still reachable in loss record 33 of 70
 ==25389==    by 0x11323E: build_final_map (parse_map.c:98) ← TON CODE !!
+
+# 🚨 LEAKS DE TON CODE :
+445 bytes in 14 blocks: handle_line_copy / parse_map_line  ← TON PARSING !
+476 bytes in 14 blocks: build_final_map                   ← TON PARSING !
+124 bytes in 4 blocks:  extract_path / parse_texture_line ← TON PARSING !
+224 bytes in 2 blocks:  parse_map_line / build_final_map  ← TON PARSING !
+
+
+cleanup_parsing()
+build_final_map() 
+handle_line_copy()
+extract_path()
+
+
+FONCTION INTERDTE : new_lines = realloc(map_lines, sizeof(char *) * (count + 1));

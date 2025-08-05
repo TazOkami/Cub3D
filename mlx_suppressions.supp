@@ -1,4 +1,4 @@
-# MLX/X11 Graphics Libraries Suppressions
+# MLX/X11 Graphics Libraries Suppressions - COMPLETE VERSION
 {
    mlx_init_leak
    Memcheck:Leak
@@ -18,6 +18,33 @@
 }
 
 {
+   mlx_image_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:mlx_new_image
+}
+
+{
+   mlx_xpm_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:mlx_xpm_file_to_image
+}
+
+{
+   mlx_put_image_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:mlx_put_image_to_window
+}
+
+{
    x11_graphics_leak
    Memcheck:Leak
    match-leak-kinds: reachable
@@ -34,9 +61,130 @@
 }
 
 {
+   x11_xext_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libXext.so*
+}
+
+{
+   x11_xrandr_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libXrandr.so*
+}
+
+{
+   x11_fontconfig_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so*
+}
+
+{
+   x11_freetype_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libfreetype.so*
+}
+
+{
+   x11_xrender_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libXrender.so*
+}
+
+{
    x11_uninit_writev
    Memcheck:Param
    writev(vector[0])
    fun:writev
    obj:/usr/lib/x86_64-linux-gnu/libxcb.so*
+}
+
+{
+   x11_uninit_write
+   Memcheck:Param
+   write(buf)
+   fun:write
+   obj:/usr/lib/x86_64-linux-gnu/libxcb.so*
+}
+
+{
+   dlopen_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   ...
+   fun:dlopen*
+}
+
+{
+   pthread_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   ...
+   fun:pthread_*
+}
+
+{
+   locale_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   ...
+   fun:setlocale
+}
+
+{
+   mlx_strdup_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   ...
+   fun:mlx_init
+}
+
+{
+   mlx_xshm_image_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:mlx_int_new_xshm_image
+}
+
+{
+   mlx_init_internal_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:mlx_init
+}
+
+{
+   x11_string_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so*
+}
+
+{
+   xext_string_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libXext.so*
 }
