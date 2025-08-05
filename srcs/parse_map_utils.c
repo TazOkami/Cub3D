@@ -50,56 +50,53 @@ void	set_player_from_map(t_vector2d *pos, char *dir,
 	pos_data.grid[pos_data.y][pos_data.x] = '0';
 }
 
-void	find_player_position(t_temp_map map,
-	t_vector2d *pos, char *dir)
-{
-	int			y;
-	int			x;
-	t_map_pos	pd;
-
-	pd.grid = map.grid;
-	y = 0;
-	while (y < map.height)
-	{
-		x = 0;
-		while (x < map.width)
-		{
-			if (is_spawn(map.grid[y][x]))
-			{
-				pd.y = y;
-				pd.x = x;
-				set_player_from_map(pos, dir, pd);
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-	error_exit("No player position found in map");
-}
-
-void	validate_map(char **map, int height, int width)
+static int	count_players(t_temp_map map)
 {
 	int	y;
 	int	x;
+	int	count;
 
-	y = 0;
-	while (y < height)
+	count = 0;
+	y = -1;
+	while (++y < map.height)
 	{
-		x = 0;
-		while (x < width)
+		x = -1;
+		while (++x < map.width)
+			if (is_spawn(map.grid[y][x]))
+				count++;
+	}
+	if (count == 0)
+		error_exit("No player position found in map");
+	if (count > 1)
+		error_exit("Multiple player positions found in map");
+	return (count);
+}
+
+void	find_player_position(t_temp_map map, t_vector2d *pos, char *dir)
+{
+	int			y;
+	int			x;
+	int			player_count;
+	t_map_pos	pd;
+
+	player_count = count_players(map);
+	if (player_count == 1)
+	{
+		pd.grid = map.grid;
+		y = -1;
+		while (++y < map.height)
 		{
-			if (map[y][x] == '0')
+			x = -1;
+			while (++x < map.width)
 			{
-				if (y == 0 || y == height - 1
-					|| x == 0 || x == width - 1)
-					error_exit("Map not surrounded by walls");
-				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
-					|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-					error_exit("Map not surrounded by walls");
+				if (is_spawn(map.grid[y][x]))
+				{
+					pd.y = y;
+					pd.x = x;
+					set_player_from_map(pos, dir, pd);
+					return ;
+				}
 			}
-			x++;
 		}
-		y++;
 	}
 }

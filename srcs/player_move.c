@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 14:27:58 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 16:57:22 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 14:49:24 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	move_player_right(t_game *game)
 		game->player.position.y = new_y;
 	}
 }
+
 void	move_player_left(t_game *game)
 {
 	t_vector2d	right;

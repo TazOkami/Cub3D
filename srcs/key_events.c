@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:12:03 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:36:23 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 14:48:54 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	handle_player_movement(t_game *game)
 		move_player_forward(game);
 	if (game->keys[KEY_S])
 		move_player_backward(game);
-	if ( game->keys[KEY_LEFT])
+	if (game->keys[KEY_LEFT])
 		rotate_player_left(game);
 	if (game->keys[KEY_RIGHT])
 		rotate_player_right(game);
-	if (game->keys[KEY_A] )
+	if (game->keys[KEY_A])
 		move_player_left(game);
 	if (game->keys[KEY_D])
 		move_player_right(game);

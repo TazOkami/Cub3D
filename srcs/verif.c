@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 16:41:46 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 16:43:20 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 14:47:31 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,30 @@ bool	is_empty_line(char *line)
 		i++;
 	}
 	return (true);
+}
+
+void	validate_map(char **map, int height, int width)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (map[y][x] == '0')
+			{
+				if (y == 0 || y == height - 1
+					|| x == 0 || x == width - 1)
+					error_exit("Map not surrounded by walls");
+				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
+					|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
+					error_exit("Map not surrounded by walls");
+			}
+			x++;
+		}
+		y++;
+	}
 }
