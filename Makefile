@@ -48,6 +48,7 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/parse_colors.c \
 	   $(SRCS_DIR)/parse_map_utils.c \
 	   $(SRCS_DIR)/parse_map_free.c \
+	   $(SRCS_DIR)/parse_player.c \
 	   $(SRCS_DIR)/parse_map.c
 
 # Objects
@@ -185,13 +186,13 @@ run-leaks: leaks
 	fi
 
 valgrind: $(NAME)
-	@echo "$(PURPLE)🔍 Running with Valgrind...$(NC)"
-	@if [ -f "maps/map.cub" ]; then \
-		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=/usr/share/glib-2.0/valgrind/glib.supp ./$(NAME) maps/map.cub; \
-	else \
-		echo "$(YELLOW)⚠️  No map found for Valgrind test$(NC)"; \
-	fi
+	@echo "🔬 Testing memory with MLX suppressions..."
+	@valgrind --suppressions=mlx_suppressions.supp --leak-check=full --show-leak-kinds=all ./$(NAME) maps/test_map/tets_map1.cub
 
+valgrind-full: $(NAME)
+	@echo "🔍 Full memory analysis..."
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) maps/test_map/tets_map1.cub
+	
 # ┌─────────────────────────────────────────────────────────┐
 # │ 🧹 NETTOYAGE                                           │
 # └─────────────────────────────────────────────────────────┘

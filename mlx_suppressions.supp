@@ -1,0 +1,42 @@
+# MLX/X11 Graphics Libraries Suppressions
+{
+   mlx_init_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:XOpenDisplay
+   fun:mlx_init
+}
+
+{
+   mlx_window_leak
+   Memcheck:Leak  
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:mlx_new_window
+}
+
+{
+   x11_graphics_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so*
+}
+
+{
+   x11_xcb_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   obj:/usr/lib/x86_64-linux-gnu/libxcb.so*
+}
+
+{
+   x11_uninit_writev
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   obj:/usr/lib/x86_64-linux-gnu/libxcb.so*
+}

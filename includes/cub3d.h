@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 21:03:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/05 16:31:34 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ bool	is_map_line(char *line);
 bool	is_empty_line(char *line);
 double	normalize_angle(double angle);
 double	calculate_distance(double x1, double y1, double x2, double y2);
+void	cleanup_static_map_data(void);
 
 // ═══════════════════════════════════════════════════════════
 // 🛠️ UTILITY FUNCTIONS
