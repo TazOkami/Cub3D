@@ -44,7 +44,7 @@ void	move_player_backward(t_game *game)
 	}
 }
 
-void	move_player_left(t_game *game)
+void	move_player_right(t_game *game)
 {
 	t_vector2d	right;
 	double		new_x;
@@ -60,7 +60,7 @@ void	move_player_left(t_game *game)
 		game->player.position.y = new_y;
 	}
 }
-void	move_player_right(t_game *game)
+void	move_player_left(t_game *game)
 {
 	t_vector2d	right;
 	double		new_x;
