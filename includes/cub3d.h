@@ -136,6 +136,51 @@ double	normalize_angle(double angle);
 double	calculate_distance(double x1, double y1, double x2, double y2);
 void	cleanup_static_map_data(void);
 
+// verifie les doublons ou les fonction plus utiliser
+// Nouvelles fonctions de parsing en deux passes
+void	process_map_line_count(char *line, int *count, int *max_width);
+int		count_map_lines_and_width(char *filename, int *max_width);
+int		clean_line_length(char *line);
+char	**allocate_map_array(int line_count);
+void	clean_and_copy_line(char *dst, char *src);
+int		fill_map_from_file(char *filename, char **map_lines, int expected_count);
+int		free_and_return(char **map_lines, int count, char *line, int fd);
+char	**free_partial_map(char **map, int allocated_count);
+void	fill_map_row(char *dst, char *src, int width);
+int		open_cub_file(char *filename);
+void	init_parsing(t_parsing *parsing);
+int		parse_config_only(char *filename, t_parsing *parsing);
+int		setup_map_data(char *filename, t_parsing *parsing);
+void	setup_game_colors(t_game *game, t_parsing *parsing);
+void	transfer_texture_paths(t_game *game, t_parsing *parsing);
+void	free_texture_paths(t_game *game);
+void	free_mlx_resources(t_game *game);
+void	free_map_grid(char **grid, int height);
+int		parse_cub_file(char *filename, t_parsing *parsing);
+void	setup_game_colors(t_game *game, t_parsing *parsing);
+int	parse_config_only(char *filename, t_parsing *parsing);
+int	setup_map_data(char *filename, t_parsing *parsing);
+void	init_parsing(t_parsing *parsing);
+
+
+void	process_map_line_count(char *line, int *count, int *max_width);
+int		count_map_lines_and_width(char *filename, int *max_width);
+int		clean_line_length(char *line);
+char	**allocate_map_array(int line_count);
+void	clean_and_copy_line(char *dst, char *src);
+int		fill_map_from_file(char *filename, char **map_lines, int expected_count);
+int		free_and_return(char **map_lines, int count, char *line, int fd);
+char	**free_partial_map(char **map, int allocated_count);
+void	fill_map_row(char *dst, char *src, int width);
+int		open_cub_file(char *filename);
+void	init_parsing(t_parsing *parsing);
+int		parse_config_only(char *filename, t_parsing *parsing);
+int		setup_map_data(char *filename, t_parsing *parsing);
+void	setup_game_colors(t_game *game, t_parsing *parsing);
+void	transfer_texture_paths(t_game *game, t_parsing *parsing);
+void	free_texture_paths(t_game *game);
+void	free_mlx_resources(t_game *game);
+void	free_map_grid(char **grid, int height);
 // ═══════════════════════════════════════════════════════════
 // 🛠️ UTILITY FUNCTIONS
 // ═══════════════════════════════════════════════════════════

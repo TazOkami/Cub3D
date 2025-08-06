@@ -33,12 +33,24 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2);
 		return (1);
 	}
+
+	// Vérifier l'extension avant d'initialiser quoi que ce soit
+	if (!argv[1] || !ft_strstr(argv[1], ".cub"))
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("File must have .cub extension\n", 2);
+		return (1);
+	}
+
 	ft_memset(&game, 0, sizeof(t_game));
 	init_game_defaults(&game);
 	if (init_mlx(&game))
 		cleanup_and_exit(&game, "MLX initialization failed");
 	if (load_map(argv[1], &game))
-		cleanup_and_exit(&game, "Map loading failed");
+	{
+		cleanup_game(&game);
+		return (1);
+	}
 	if (load_textures(&game))
 		cleanup_and_exit(&game, "Texture loading failed");
 	mlx_hook(game.mlx.window_ptr, 2, 1L << 0, handle_keypress, &game);
@@ -49,3 +61,4 @@ int	main(int argc, char **argv)
 	cleanup_game(&game);
 	return (0);
 }
+

@@ -47,7 +47,7 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/parse_textures.c \
 	   $(SRCS_DIR)/parse_colors.c \
 	   $(SRCS_DIR)/parse_map_utils.c \
-	   $(SRCS_DIR)/parse_map_free.c \
+	   $(SRCS_DIR)/parse_map_build.c \
 	   $(SRCS_DIR)/parse_player.c \
 	   $(SRCS_DIR)/parse_map.c
 
@@ -192,7 +192,7 @@ valgrind: $(NAME)
 valgrind-full: $(NAME)
 	@echo "🔍 Full memory analysis..."
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) maps/test_map/tets_map1.cub
-	
+
 # ┌─────────────────────────────────────────────────────────┐
 # │ 🧹 NETTOYAGE                                           │
 # └─────────────────────────────────────────────────────────┘
