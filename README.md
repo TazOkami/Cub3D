@@ -71,6 +71,15 @@
 
 
 
+==63373== 112 bytes: parse_map_line (parse_map.c:47)      # ← STATIQUE
+==63373== 112 bytes: build_final_map (parse_map.c:98)     # ← MALLOC MAP
+==63373== 124 bytes: extract_path (parse_textures.c:38)   # ← PATHS TEXTURES
+==63373== 445 bytes: handle_line_copy (parse_map.c:20)    # ← STATIQUE LIGNES
+==63373== 476 bytes: build_final_map (parse_map.c:104)    # ← MALLOC LIGNES MAP
+
+
+
+
 
 
 FONCTION INTERDTE : new_lines = realloc(map_lines, sizeof(char *) * (count + 1));
