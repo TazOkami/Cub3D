@@ -22,7 +22,6 @@ static int	game_loop(t_game *game)
 		game->mlx.image_ptr, 0, 0);
 	return (0);
 }
-
 int	main(int argc, char **argv)
 {
 	t_game	game;

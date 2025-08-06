@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/04 15:38:20 by malafont          #+#    #+#             */
+/*   Updated: 2025/08/06 XX:XX:XX by malafont         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int	fill_map_from_file(char *filename, char **map_lines, int expected_count)
@@ -109,16 +121,10 @@ bool	is_spawn(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int	open_cub_file(char *filename)
+void	clean_gnl_buffer(int fd)
 {
-	int	fd;
+	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error opening .cub file");
-		return (-1);
-	}
-	printf("✅ File %s opened successfully\n", filename);
-	return (fd);
+	while ((line = get_next_line(fd)) != NULL)
+		free(line);
 }

@@ -181,6 +181,7 @@ void	transfer_texture_paths(t_game *game, t_parsing *parsing);
 void	free_texture_paths(t_game *game);
 void	free_mlx_resources(t_game *game);
 void	free_map_grid(char **grid, int height);
+void	clean_gnl_buffer(int fd);
 // ═══════════════════════════════════════════════════════════
 // 🛠️ UTILITY FUNCTIONS
 // ═══════════════════════════════════════════════════════════

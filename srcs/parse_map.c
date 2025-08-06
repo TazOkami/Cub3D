@@ -44,6 +44,9 @@ int	count_map_lines_and_width(char *filename, int *max_width)
 		process_map_line_count(line, &count, max_width);
 		free(line);
 	}
+	// Vider le buffer de get_next_line pour éviter les fuites
+	while ((line = get_next_line(fd)) != NULL)
+		free(line);
 	close(fd);
 	return (count);
 }
@@ -91,4 +94,3 @@ void	clean_and_copy_line(char *dst, char *src)
 	}
 	dst[len] = '\0';
 }
-

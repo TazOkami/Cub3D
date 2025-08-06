@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,24 +12,24 @@
 
 #include "../includes/cub3d.h"
 
-// int	open_cub_file(char *filename)
-// {
-// 	int	fd;
+int	open_cub_file(char *filename)
+{
+	int	fd;
 
-// 	if (!filename || !ft_strstr(filename, ".cub"))
-// 	{
-// 		printf("Error: File must have .cub extension\n");
-// 		return (-1);
-// 	}
-// 	fd = open(filename, O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Error opening .cub file");
-// 		return (-1);
-// 	}
-// 	printf("✅ File %s opened successfully\n", filename);
-// 	return (fd);
-// }
+	if (!filename || !ft_strstr(filename, ".cub"))
+	{
+		printf("Error: File must have .cub extension\n");
+		return (-1);
+	}
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error opening .cub file");
+		return (-1);
+	}
+	printf("✅ File %s opened successfully\n", filename);
+	return (fd);
+}
 
 void	init_parsing(t_parsing *parsing)
 {
@@ -62,6 +61,7 @@ int	parse_config_only(char *filename, t_parsing *parsing)
 		}
 		free(line);
 	}
+	clean_gnl_buffer(fd);
 	close(fd);
 	return (0);
 }
@@ -108,34 +108,4 @@ void	setup_game_colors(t_game *game, t_parsing *parsing)
 		| (parsing->floor_color[1] << 8) | parsing->floor_color[2];
 	game->textures.ceiling_color = (parsing->ceiling_color[0] << 16)
 		| (parsing->ceiling_color[1] << 8) | parsing->ceiling_color[2];
-}
-int	load_map(char *filename, t_game *game)
-{
-	t_parsing	parsing;
-
-	printf("🗺️ Loading map from: %s\n", filename);
-
-	// Initialiser la structure de parsing AVANT de l'utiliser
-	ft_memset(&parsing, 0, sizeof(t_parsing));
-
-	if (parse_cub_file(filename, &parsing))
-	{
-		printf("Error: Failed to parse .cub file\n");
-		free_parsing_data(&parsing);
-		return (1);
-	}
-	game->map.grid = build_final_map(&parsing, &game->player);
-	if (!game->map.grid)
-	{
-		printf("Error: Failed to build final map\n");
-		free_parsing_data(&parsing);
-		return (1);
-	}
-	game->map.width = parsing.map_width;
-	game->map.height = parsing.map_height;
-	setup_game_colors(game, &parsing);
-	transfer_texture_paths(game, &parsing);
-	free_parsing_data(&parsing);
-	printf("✅ Map loaded successfully!\n");
-	return (0);
 }

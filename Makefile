@@ -49,6 +49,7 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/parse_map_utils.c \
 	   $(SRCS_DIR)/parse_map_build.c \
 	   $(SRCS_DIR)/parse_player.c \
+	   $(SRCS_DIR)/map_loader.c \
 	   $(SRCS_DIR)/parse_map.c
 
 # Objects
