@@ -13,6 +13,22 @@
 
 #include "../includes/cub3d.h"
 
+void cleanup_gnl_remainder(void)
+{
+    char *line;
+    
+    printf("🔄 Cleaning GNL remainder...\n");
+    line = get_next_line(-1);
+    if (line)
+    {
+        printf("✅ GNL remainder freed: %p\n", line);
+        free(line);
+    }
+    else
+        printf("ℹ️  No GNL remainder to free\n");
+}
+
+
 void	free_textures(t_game *game)
 {
 	if (game->textures.north_wall.image_ptr)
@@ -83,6 +99,7 @@ void	cleanup_game(t_game *game)
 {
 	if (!game)
 		return ;
+	cleanup_gnl_remainder();
 	free_textures(game);
 	free_texture_paths(game);
 	free_mlx_resources(game);

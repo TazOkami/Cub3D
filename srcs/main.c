@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:44 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/07/31 15:35:50 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/06 15:47:48 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.mlx.window_ptr, 17, 0, handle_destroy, &game);
 	mlx_loop_hook(game.mlx.mlx_ptr, game_loop, &game);
 	mlx_loop(game.mlx.mlx_ptr);
+	printf("🔄 Cleaning...\n");
 	cleanup_game(&game);
 	return (0);
 }

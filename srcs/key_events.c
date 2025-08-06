@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:12:03 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/08/05 14:48:54 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/06 15:51:53 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ void	handle_player_movement(t_game *game)
 
 int	handle_keypress(int keycode, t_game *game)
 {
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.window_ptr);
-		exit(0);
-	}
-	if (keycode >= 0 && keycode < 65536)
-		game->keys[keycode] = true;
-	return (0);
+    if (keycode == KEY_ESC)
+    {
+        printf("🔄 ESC pressed - cleaning up...\n");
+        cleanup_game(game);  // 🔥 CLEANUP D'ABORD !
+        exit(0);             // Puis exit
+    }
+    if (keycode >= 0 && keycode < 65536)
+        game->keys[keycode] = true;
+    return (0);
 }
 
 int	handle_keyrelease(int keycode, t_game *game)
