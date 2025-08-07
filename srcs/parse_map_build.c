@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -50,4 +49,13 @@ char	**build_final_map(t_parsing *parsing, t_player *player)
 	set_player_direction(player, player_dir);
 	validate_map(map, parsing->map_height, parsing->map_width);
 	return (map);
+}
+
+int	parse_cub_file(char *filename, t_parsing *parsing)
+{
+	if (parse_config_only(filename, parsing))
+		return (1);
+	if (setup_map_data(filename, parsing))
+		return (1);
+	return (check_parsing_complete(parsing));
 }

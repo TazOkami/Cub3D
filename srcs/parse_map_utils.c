@@ -41,38 +41,6 @@ int	fill_map_from_file(char *filename, char **map_lines, int expected_count)
 	return (0);
 }
 
-int	free_and_return(char **map_lines, int count, char *line, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (i < count)
-	{
-		if (map_lines[i])
-			free(map_lines[i]);
-		i++;
-	}
-	free(map_lines);
-	free(line);
-	close(fd);
-	return (1);
-}
-
-char	**free_partial_map(char **map, int allocated_count)
-{
-	int	i;
-
-	i = 0;
-	while (i < allocated_count)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-	error_exit("Memory allocation failed");
-	return (NULL);
-}
-
 void	fill_map_row(char *dst, char *src, int width)
 {
 	int	x;
@@ -119,12 +87,4 @@ bool	is_map_line(char *line)
 bool	is_spawn(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
-
-void	clean_gnl_buffer(int fd)
-{
-	char	*line;
-
-	while ((line = get_next_line(fd)) != NULL)
-		free(line);
 }

@@ -93,15 +93,6 @@ int	setup_map_data(char *filename, t_parsing *parsing)
 	return (0);
 }
 
-int	parse_cub_file(char *filename, t_parsing *parsing)
-{
-	if (parse_config_only(filename, parsing))
-		return (1);
-	if (setup_map_data(filename, parsing))
-		return (1);
-	return (check_parsing_complete(parsing));
-}
-
 void	setup_game_colors(t_game *game, t_parsing *parsing)
 {
 	game->textures.floor_color = (parsing->floor_color[0] << 16)

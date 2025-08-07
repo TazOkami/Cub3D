@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/31 15:42:19 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/08/06 15:54:24 by Jpaulis          ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   error_handling.c								   :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: Jpaulis <Jpaulis@student.s19.be>		   +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/07/31 15:42:19 by Jpaulis		   #+#	#+#			 */
+/*   Updated: 2025/08/06 15:54:24 by Jpaulis		  ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
@@ -29,9 +29,8 @@ void	cleanup_and_exit(t_game *game, char *message)
 
 int	handle_destroy(t_game *game)
 {
-    printf("🔄 Window closed - cleaning up...\n");
-    cleanup_game(game);  // 🔥 CLEANUP D'ABORD !
-    exit(0);             // Puis exit
-    return (0);
+	printf("🔄 Window closed - cleaning up...\n");
+	cleanup_game(game);
+	exit(0);
+	return (0);
 }
-

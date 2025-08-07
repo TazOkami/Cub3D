@@ -98,7 +98,6 @@ typedef struct s_textures
 	char		*west_path; // Path to west texture file
 }	t_textures;
 
-
 typedef struct s_draw_context
 {
 	int		line_height;
@@ -108,8 +107,6 @@ typedef struct s_draw_context
 	double	step;
 	int		x;
 }	t_draw_context;
-
-
 
 // ═══════════════════════════════════════════════════════════
 // 🗺️ MAP INFORMATION STRUCTURE
@@ -124,7 +121,8 @@ typedef struct s_map_info
 	int		sprite_count; // Number of sprites in map
 }	t_map_info;
 
-// ne remplace pas la structude ci dessu qui est utiliser par t_game une fois tout initialiser
+// ne remplace pas la structude ci dessu qui est utiliser
+//par t_game une fois tout initialiser
 // est utiliser pour alleger le nombre de paramettre dans parse map.
 // aurais pus etre inclu dans t_parsing mais trop de truc a remodifier apres.
 typedef struct s_temp_map

@@ -65,133 +65,128 @@
 # define COLOR_DARK_GRAY 0x404040
 
 # include "struct.h"
-
 // ═══════════════════════════════════════════════════════════
 // 🎮 PLAYER MOVEMENT FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-void	handle_player_movement(t_game *game);
-void	move_player_forward(t_game *game);
-void	move_player_backward(t_game *game);
-void	rotate_player_left(t_game *game);
-void	rotate_player_right(t_game *game);
-void	move_player_left(t_game *game);
-void	move_player_right(t_game *game);
-
+void		handle_player_movement(t_game *game);
+void		move_player_forward(t_game *game);
+void		move_player_backward(t_game *game);
+void		rotate_player_left(t_game *game);
+void		rotate_player_right(t_game *game);
+void		move_player_left(t_game *game);
+void		move_player_right(t_game *game);
 // ═══════════════════════════════════════════════════════════
 // 🎨 RENDERING FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-void	render_scene(t_game *game);
-void	cast_rays(t_game *game);
-void	cast_single_ray(t_game *game, int x);
-void	init_ray(t_ray *ray, t_game *game, int x);
-void	perform_dda(t_ray *ray, t_game *game);
-void	calculate_wall_distance(t_ray *ray, t_game *game);
-void	draw_wall_column(t_game *game, t_ray *ray, int x);
-void	draw_floor_and_ceiling(t_game *game);
-void	put_pixel(t_game *game, int x, int y, int color);
-
+void		render_scene(t_game *game);
+void		cast_rays(t_game *game);
+void		cast_single_ray(t_game *game, int x);
+void		init_ray(t_ray *ray, t_game *game, int x);
+void		perform_dda(t_ray *ray, t_game *game);
+void		calculate_wall_distance(t_ray *ray, t_game *game);
+void		draw_wall_column(t_game *game, t_ray *ray, int x);
+void		draw_floor_and_ceiling(t_game *game);
+void		put_pixel(t_game *game, int x, int y, int color);
 // nouvelle fonction render_utils.c
 t_texture	*select_wall_texture(t_game *game, t_ray *ray);
-int get_texture_x(t_game *game, t_ray *ray, t_texture *texture);
-
+int			get_texture_x(t_game *game, t_ray *ray, t_texture *texture);
 // ═══════════════════════════════════════════════════════════
 // 🖼️ TEXTURE FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-int		load_textures(t_game *game);
-void	free_textures(t_game *game);
-int		get_texture_pixel(t_texture *texture, int x, int y);
-
+int			load_textures(t_game *game);
+void		free_textures(t_game *game);
+int			get_texture_pixel(t_texture *texture, int x, int y);
 // ═══════════════════════════════════════════════════════════
 // 🗺️ MAP FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-int		init_default_map(t_game *game);
-int		load_map(char *filename, t_game *game);
-void	free_map_grid(char **grid, int height);
-int		is_wall_at(t_game *game, double x, double y);
-int		get_map_cell(t_game *game, int x, int y);
-void	init_game_defaults(t_game *game);
-int		init_mlx(t_game *game);
-void	set_player_direction(t_player *player, char direction);
-void	set_player_from_map(t_vector2d *pos, char *dir,	t_map_pos pos_data);
-bool	is_spawn(char c);
-void	find_player_position(t_temp_map map, t_vector2d *pos, char *dir);
-void	validate_map(char **map, int height, int width);
-void	free_map_lines(char **map_lines, int count);
-
+int			init_default_map(t_game *game);
+int			load_map(char *filename, t_game *game);
+void		free_map_grid(char **grid, int height);
+int			is_wall_at(t_game *game, double x, double y);
+int			get_map_cell(t_game *game, int x, int y);
+void		init_game_defaults(t_game *game);
+int			init_mlx(t_game *game);
+void		set_player_direction(t_player *player, char direction);
+void		set_player_from_map(t_vector2d *pos, char *dir,	t_map_pos pos_data);
+bool		is_spawn(char c);
+void		find_player_position(t_temp_map map, t_vector2d *pos, char *dir);
+void		validate_map(char **map, int height, int width);
+void		free_map_lines(char **map_lines, int count);
 // ═══════════════════════════════════════════════════════════
 // 📄 PARSING FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-int		parse_cub_file(char *filename, t_parsing *parsing);
-int		open_cub_file(char *filename);
-int		check_parsing_complete(t_parsing *parsing);
-void	parse_texture_line(char *line, t_parsing *parsing);
-void	parse_color_line(char *line, t_parsing *parsing);
-void	parse_map_line(char *line, t_parsing *parsing);
-char	**build_final_map(t_parsing *parsing, t_player *player);
-bool	is_texture_line(char *line);
-bool	is_color_line(char *line);
-bool	is_map_line(char *line);
-bool	is_empty_line(char *line);
-double	normalize_angle(double angle);
-double	calculate_distance(double x1, double y1, double x2, double y2);
-void	cleanup_static_map_data(void);
-
+int			parse_cub_file(char *filename, t_parsing *parsing);
+int			open_cub_file(char *filename);
+int			check_parsing_complete(t_parsing *parsing);
+void		parse_texture_line(char *line, t_parsing *parsing);
+void		parse_color_line(char *line, t_parsing *parsing);
+void		parse_map_line(char *line, t_parsing *parsing);
+char		**build_final_map(t_parsing *parsing, t_player *player);
+bool		is_texture_line(char *line);
+bool		is_color_line(char *line);
+bool		is_map_line(char *line);
+bool		is_empty_line(char *line);
+double		normalize_angle(double angle);
+double		calculate_distance(double x1, double y1, double x2, double y2);
+void		cleanup_static_map_data(void);
 // verifie les doublons ou les fonction plus utiliser
 // Nouvelles fonctions de parsing en deux passes
-void	process_map_line_count(char *line, int *count, int *max_width);
-int		count_map_lines_and_width(char *filename, int *max_width);
-int		clean_line_length(char *line);
-char	**allocate_map_array(int line_count);
-void	clean_and_copy_line(char *dst, char *src);
-int		fill_map_from_file(char *filename, char **map_lines, int expected_count);
-int		free_and_return(char **map_lines, int count, char *line, int fd);
-char	**free_partial_map(char **map, int allocated_count);
-void	fill_map_row(char *dst, char *src, int width);
-int		open_cub_file(char *filename);
-void	init_parsing(t_parsing *parsing);
-int		parse_config_only(char *filename, t_parsing *parsing);
-int		setup_map_data(char *filename, t_parsing *parsing);
-void	setup_game_colors(t_game *game, t_parsing *parsing);
-void	transfer_texture_paths(t_game *game, t_parsing *parsing);
-void	free_texture_paths(t_game *game);
-void	free_mlx_resources(t_game *game);
-void	free_map_grid(char **grid, int height);
-int		parse_cub_file(char *filename, t_parsing *parsing);
-void	setup_game_colors(t_game *game, t_parsing *parsing);
-int	parse_config_only(char *filename, t_parsing *parsing);
-int	setup_map_data(char *filename, t_parsing *parsing);
-void	init_parsing(t_parsing *parsing);
-
-
-void	process_map_line_count(char *line, int *count, int *max_width);
-int		count_map_lines_and_width(char *filename, int *max_width);
-int		clean_line_length(char *line);
-char	**allocate_map_array(int line_count);
-void	clean_and_copy_line(char *dst, char *src);
-int		fill_map_from_file(char *filename, char **map_lines, int expected_count);
-int		free_and_return(char **map_lines, int count, char *line, int fd);
-char	**free_partial_map(char **map, int allocated_count);
-void	fill_map_row(char *dst, char *src, int width);
-int		open_cub_file(char *filename);
-void	init_parsing(t_parsing *parsing);
-int		parse_config_only(char *filename, t_parsing *parsing);
-int		setup_map_data(char *filename, t_parsing *parsing);
-void	setup_game_colors(t_game *game, t_parsing *parsing);
-void	transfer_texture_paths(t_game *game, t_parsing *parsing);
-void	free_texture_paths(t_game *game);
-void	free_mlx_resources(t_game *game);
-void	free_map_grid(char **grid, int height);
-void	clean_gnl_buffer(int fd);
+void		process_map_line_count(char *line, int *count, int *max_width);
+int			count_map_lines_and_width(char *filename, int *max_width);
+int			clean_line_length(char *line);
+char		**allocate_map_array(int line_count);
+void		clean_and_copy_line(char *dst, char *src);
+int			fill_map_from_file(char *filename, char **map_lines,
+				int expected_count);
+int			free_and_return(char **map_lines, int count, char *line, int fd);
+char		**free_partial_map(char **map, int allocated_count);
+void		fill_map_row(char *dst, char *src, int width);
+int			open_cub_file(char *filename);
+void		init_parsing(t_parsing *parsing);
+int			parse_config_only(char *filename, t_parsing *parsing);
+int			setup_map_data(char *filename, t_parsing *parsing);
+void		setup_game_colors(t_game *game, t_parsing *parsing);
+void		transfer_texture_paths(t_game *game, t_parsing *parsing);
+void		free_texture_paths(t_game *game);
+void		free_mlx_resources(t_game *game);
+void		free_map_grid(char **grid, int height);
+int			parse_cub_file(char *filename, t_parsing *parsing);
+void		setup_game_colors(t_game *game, t_parsing *parsing);
+int			parse_config_only(char *filename, t_parsing *parsing);
+int			setup_map_data(char *filename, t_parsing *parsing);
+void		init_parsing(t_parsing *parsing);
+//
+void		process_map_line_count(char *line, int *count, int *max_width);
+int			count_map_lines_and_width(char *filename, int *max_width);
+int			clean_line_length(char *line);
+char		**allocate_map_array(int line_count);
+void		clean_and_copy_line(char *dst, char *src);
+int			fill_map_from_file(char *filename, char **map_lines,
+				int expected_count);
+int			free_and_return(char **map_lines, int count, char *line, int fd);
+char		**free_partial_map(char **map, int allocated_count);
+void		fill_map_row(char *dst, char *src, int width);
+int			open_cub_file(char *filename);
+void		init_parsing(t_parsing *parsing);
+int			parse_config_only(char *filename, t_parsing *parsing);
+int			setup_map_data(char *filename, t_parsing *parsing);
+void		setup_game_colors(t_game *game, t_parsing *parsing);
+void		transfer_texture_paths(t_game *game, t_parsing *parsing);
+void		free_texture_paths(t_game *game);
+void		free_mlx_resources(t_game *game);
+void		free_map_grid(char **grid, int height);
+void		clean_gnl_buffer(int fd);
 // ═══════════════════════════════════════════════════════════
 // 🛠️ UTILITY FUNCTIONS
 // ═══════════════════════════════════════════════════════════
-void	error_exit(char *message);
-void	cleanup_and_exit(t_game *game, char *message);
-void	cleanup_resources(t_game *game);
-void	cleanup_game(t_game *game);
-void	free_parsing_data(t_parsing *parsing);
-int		handle_destroy(t_game *game);
-int		handle_keypress(int keycode, t_game *game);
-int		handle_keyrelease(int keycode, t_game *game);
+void		error_exit(char *message);
+void		cleanup_and_exit(t_game *game, char *message);
+void		cleanup_resources(t_game *game);
+void		cleanup_game(t_game *game);
+void		cleanup_gnl_remainder(void);
+void		free_parsing_data(t_parsing *parsing);
+int			handle_destroy(t_game *game);
+int			handle_keypress(int keycode, t_game *game);
+int			handle_keyrelease(int keycode, t_game *game);
 
 #endif

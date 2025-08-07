@@ -11,15 +11,45 @@
 /* ************************************************************************** */
 #include "../includes/cub3d.h"
 
-void	free_map_lines(char **map_lines, int count)
+int	free_and_return(char **map_lines, int count, char *line, int fd)
 {
 	int	i;
 
 	i = 0;
 	while (i < count)
 	{
-		free(map_lines[i]);
+		if (map_lines[i])
+			free(map_lines[i]);
 		i++;
 	}
 	free(map_lines);
+	free(line);
+	close(fd);
+	return (1);
+}
+
+char	**free_partial_map(char **map, int allocated_count)
+{
+	int	i;
+
+	i = 0;
+	while (i < allocated_count)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+	error_exit("Memory allocation failed");
+	return (NULL);
+}
+
+void	clean_gnl_buffer(int fd)
+{
+	char	*line;
+
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 }

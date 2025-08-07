@@ -36,6 +36,7 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/utils.c \
 	   $(SRCS_DIR)/error_handling.c \
 	   $(SRCS_DIR)/cleanup.c \
+	   $(SRCS_DIR)/cleanup2.c \
 	   $(SRCS_DIR)/key_events.c \
 	   $(SRCS_DIR)/init_game.c \
 	   $(SRCS_DIR)/init_textures.c \
@@ -48,6 +49,7 @@ SRCS = $(SRCS_DIR)/main.c \
 	   $(SRCS_DIR)/parse_colors.c \
 	   $(SRCS_DIR)/parse_map_utils.c \
 	   $(SRCS_DIR)/parse_map_build.c \
+	   $(SRCS_DIR)/parse_map_free.c \
 	   $(SRCS_DIR)/parse_player.c \
 	   $(SRCS_DIR)/map_loader.c \
 	   $(SRCS_DIR)/parse_map.c

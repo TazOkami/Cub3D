@@ -1,13 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_loader.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malafont <malafont@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/07 13:19:36 by malafont          #+#    #+#             */
+/*   Updated: 2025/08/07 13:20:52 by malafont         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
+
 int	load_map(char *filename, t_game *game)
 {
 	t_parsing	parsing;
 
 	printf("🗺️ Loading map from: %s\n", filename);
-
-	// Initialiser la structure de parsing AVANT de l'utiliser
 	ft_memset(&parsing, 0, sizeof(t_parsing));
-
 	if (parse_cub_file(filename, &parsing))
 	{
 		printf("Error: Failed to parse .cub file\n");
