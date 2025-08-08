@@ -34,3 +34,11 @@ int	handle_destroy(t_game *game)
 	exit(0);
 	return (0);
 }
+
+int	error_msg(char *message)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
+	return (1);
+}

@@ -47,6 +47,7 @@ void	clean_gnl_buffer(int fd)
 {
 	char	*line;
 
+	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		free(line);

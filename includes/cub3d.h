@@ -6,7 +6,7 @@
 /*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:33:34 by Jpaulis           #+#    #+#             */
-/*   Updated: 2025/08/05 16:31:34 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2025/08/08 17:03:55 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		put_pixel(t_game *game, int x, int y, int color);
 // nouvelle fonction render_utils.c
 t_texture	*select_wall_texture(t_game *game, t_ray *ray);
 int			get_texture_x(t_game *game, t_ray *ray, t_texture *texture);
+int			error_msg(char *message);
 // ═══════════════════════════════════════════════════════════
 // 🖼️ TEXTURE FUNCTIONS
 // ═══════════════════════════════════════════════════════════
